@@ -1,0 +1,334 @@
+{
+  "postgresdb": {
+    "db": "geoimagine"
+  },
+  "userproject": {
+    "userid": "karttur",
+    "projectid": "karttur",
+    "tractid": "karttur",
+    "siteid": "*",
+    "plotid": "*",
+    "system": "ancillary"
+  },
+  "period": {
+    "startyear": 2014,
+    "endyear": 2014,
+    "timestep": "singleyear"
+  },
+  "process": [
+    {
+      "processid": "DefaultRegionFromVector",
+      "parameters": {
+        "vector_db_id": "NAME",
+        "vector_db_name": "NAME",
+        "vector_db_category": "CATEGORY",
+        "vector_db_parentid": "PARENTNAME",
+        "vector_db_parentcat": "PARENTCAT",
+        "vector_db_stratum": "STRATUM",
+        "version": "kt1",
+        "vector_db_title": "NAME",
+        "vector_db_label": "CATEGORY"
+      },
+      "srcpath": {
+        "volume": "geoinfo2021"
+      },
+      "dstpath": {
+        "volume": "geoinfo2021"
+      },
+      "srccomp": [
+        {
+          "continents": {
+            "source": "karttur",
+            "product": "karttur",
+            "content": "defaultregions",
+            "layerid": "continents",
+            "prefix": "continents",
+            "suffix": "0",
+            "volume": "geoinfo2021",
+            "ext": "shp"
+          }
+        }
+      ],
+      "dstcopy": [
+        {
+          "continents": {
+            "layerid": "continents"
+          }
+        }
+      ]
+    },
+    {
+      "processid": "DefaultRegionFromVector",
+      "parameters": {
+        "vector_db_id": "NAME",
+        "vector_db_name": "NAME",
+        "vector_db_category": "CATEGORY",
+        "vector_db_parentid": "PARENTNAME",
+        "vector_db_parentcat": "PARENTCAT",
+        "vector_db_stratum": "STRATUM",
+        "version": "kt1",
+        "vector_db_title": "NAME",
+        "vector_db_label": "CATEGORY"
+      },
+      "srcpath": {
+        "volume": "geoinfo2021"
+      },
+      "dstpath": {
+        "volume": "geoinfo2021"
+      },
+      "srccomp": [
+        {
+          "continent-subregions": {
+            "source": "karttur",
+            "product": "karttur",
+            "content": "defaultregions",
+            "layerid": "continent-subregions",
+            "prefix": "continent-subregions",
+            "suffix": "0"
+          }
+        }
+      ],
+      "dstcopy": [
+        {
+          "continent-subregions": {
+            "layerid": "continent-subregions"
+          }
+        }
+      ]
+    },
+    {
+      "processid": "DefaultRegionFromVector",
+      "parameters": {
+        "vector_db_id": "ISO_A2",
+        "vector_db_name": "NAME",
+        "vector_db_category": "CATEGORY",
+        "vector_db_parentid": "PARENTNAME",
+        "vector_db_parentcat": "PARENTCAT",
+        "vector_db_stratum": "STRATUM",
+        "version": "kt1",
+        "vector_db_title": "FORMALNAME",
+        "vector_db_label": "TYPE"
+      },
+      "srcpath": {
+        "volume": "geoinfo2021"
+      },
+      "dstpath": {
+        "volume": "geoinfo2021"
+      },
+      "srccomp": [
+        {
+          "country": {
+            "source": "karttur",
+            "product": "karttur",
+            "content": "defaultregions",
+            "layerid": "country",
+            "prefix": "country",
+            "suffix": "0"
+          }
+        }
+      ],
+      "dstcopy": [
+        {
+          "country": {
+            "layerid": "country"
+          }
+        }
+      ]
+    },
+    {
+      "processid": "DefaultRegionFromVector",
+      "parameters": {
+        "vector_db_id": "CODE",
+        "vector_db_name": "NAME",
+        "vector_db_category": "CATEGORY",
+        "vector_db_parentid": "PARENTNAME",
+        "vector_db_parentcat": "PARENTCAT",
+        "vector_db_stratum": "STRATUM",
+        "version": "kt1",
+        "vector_db_title": "FORMALNAME",
+        "vector_db_label": "TYPE"
+      },
+      "srcpath": {
+        "volume": "geoinfo2021"
+      },
+      "dstpath": {
+        "volume": "geoinfo2021"
+      },
+      "srccomp": [
+        {
+          "country-continent": {
+            "source": "karttur",
+            "product": "karttur",
+            "content": "defaultregions",
+            "layerid": "country-continent",
+            "prefix": "country-continent",
+            "suffix": "0"
+          }
+        }
+      ],
+      "dstcopy": [
+        {
+          "country-continent": {
+            "layerid": "country-continent"
+          }
+        }
+      ]
+    },
+    {
+      "processid": "DefaultRegionFromVector",
+      "parameters": {
+        "vector_db_id": "NAME",
+        "vector_db_name": "NAME",
+        "vector_db_category": "CATEGORY",
+        "vector_db_parentid": "PARENTNAME",
+        "vector_db_parentcat": "PARENTCAT",
+        "vector_db_stratum": "STRATUM",
+        "version": "kt1",
+        "vector_db_title": "NAME",
+        "vector_db_label": "CATEGORY"
+      },
+      "srcpath": {
+        "volume": "geoinfo2021"
+      },
+      "dstpath": {
+        "volume": "geoinfo2021"
+      },
+      "srccomp": [
+        {
+          "marine-continents": {
+            "source": "karttur",
+            "product": "karttur",
+            "content": "defaultregions",
+            "layerid": "marine-continents",
+            "prefix": "marine-continents",
+            "suffix": "0"
+          }
+        }
+      ],
+      "dstcopy": [
+        {
+          "marine-continents": {
+            "layerid": "marine-continents"
+          }
+        }
+      ]
+    },
+    {
+      "processid": "DefaultRegionFromVector",
+      "parameters": {
+        "vector_db_id": "NAME",
+        "vector_db_name": "NAME",
+        "vector_db_category": "CATEGORY",
+        "vector_db_parentid": "PARENTNAME",
+        "vector_db_parentcat": "PARENTCAT",
+        "vector_db_stratum": "STRATUM",
+        "version": "kt1",
+        "vector_db_title": "NAME",
+        "vector_db_label": "CATEGORY"
+      },
+      "srcpath": {
+        "volume": "geoinfo2021"
+      },
+      "dstpath": {
+        "volume": "geoinfo2021"
+      },
+      "srccomp": [
+        {
+          "marine-continent-subregions": {
+            "source": "karttur",
+            "product": "karttur",
+            "content": "defaultregions",
+            "layerid": "marine-continent-subregions",
+            "prefix": "marine-continent-subregions",
+            "suffix": "0"
+          }
+        }
+      ],
+      "dstcopy": [
+        {
+          "marine-continent-subregions": {
+            "layerid": "marine-continent-subregions"
+          }
+        }
+      ]
+    },
+    {
+      "processid": "DefaultRegionFromVector",
+      "parameters": {
+        "vector_db_id": "CODE",
+        "vector_db_name": "NAME",
+        "vector_db_category": "CATEGORY",
+        "vector_db_parentid": "PARENTNAME",
+        "vector_db_parentcat": "PARENTCAT",
+        "vector_db_stratum": "STRATUM",
+        "version": "kt1",
+        "vector_db_title": "FORMALNAME",
+        "vector_db_label": "TYPE"
+      },
+      "srcpath": {
+        "volume": "geoinfo2021"
+      },
+      "dstpath": {
+        "volume": "geoinfo2021"
+      },
+      "srccomp": [
+        {
+          "marine-countries": {
+            "source": "karttur",
+            "product": "karttur",
+            "content": "defaultregions",
+            "layerid": "marine-countries",
+            "prefix": "marine-countries",
+            "suffix": "0"
+          }
+        }
+      ],
+      "dstcopy": [
+        {
+          "marine-countries": {
+            "layerid": "marine-countries"
+          }
+        }
+      ]
+    },
+    {
+      "processid": "DefaultRegionFromVector",
+      "parameters": {
+        "vector_db_id": "CODE",
+        "vector_db_name": "NAME",
+        "vector_db_category": "CATEGORY",
+        "vector_db_parentid": "PARENTNAME",
+        "vector_db_parentcat": "PARENTCAT",
+        "vector_db_stratum": "STRATUM",
+        "version": "kt1",
+        "vector_db_title": "FORMALNAME",
+        "vector_db_label": "TYPE"
+      },
+      "srcpath": {
+        "volume": "geoinfo2021"
+      },
+      "dstpath": {
+        "volume": "geoinfo2021"
+      },
+      "srccomp": [
+        {
+          "marine-continent-countries": {
+            "source": "karttur",
+            "product": "karttur",
+            "content": "defaultregions",
+            "layerid": "marine-continent-countries",
+            "prefix": "marine-continent-countries",
+            "suffix": "0"
+          }
+        }
+      ],
+      "dstcopy": [
+        {
+          "marine-continent-countries": {
+            "layerid": "marine-continent-countries"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "postgresdb": {
+    "db": "geoimagine"
+  },
+  "userproject": {
+    "userid": "karttur",
+    "projectid": "karttur",
+    "tractid": "karttur",
+    "siteid": "*",
+    "plotid": "*",
+    "system": "system"
+  },
+  "process": [
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "Ancillary",
+        "subprocid": "DownloadAncillary",
+        "version": "0.9.0",
+        "minuserstratum": 5,
+        "title": "Download ancillary data",
+        "label": "Download ancillary data"
+      },
+      "system": [
+        {
+          "system": "ancillary",
+          "srcsystem": "NA",
+          "dstsystem": "NA",
+          "srcdivision": "NA",
+          "dstdivision": "NA",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      ],
+      "nodes": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": [
+            {
+              "paramid": "downloadcode",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "urlstring",
+              "hint": "Import code that identifies which subroutine to use for import"
+            },
+            {
+              "paramid": "path",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "",
+              "hint": "path to download regardless of what kind"
+            },
+            {
+              "paramid": "datadir",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "",
+              "hint": "path tunder dstpath where to save file"
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srcpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "",
+              "hint": "Volume, disk or path for saving the destination data"
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "dstpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "",
+              "hint": "Volume, disk or path for saving the destination data"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

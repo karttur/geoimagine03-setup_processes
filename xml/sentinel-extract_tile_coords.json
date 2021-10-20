@@ -1,0 +1,36 @@
+{
+  "userproject": {
+    "userid": "karttur",
+    "projectid": "karttur",
+    "tractid": "karttur",
+    "siteid": "*",
+    "plotid": "*",
+    "system": "ancillary"
+  },
+  "period": {
+    "timestep": "static"
+  },
+  "process": {
+    "processid": "ExtractSentinelTileCoords",
+    "overwrite": false,
+    "parameters": {
+      "centroid": "False"
+    },
+    "srcpath": {
+      "volume": "geoinfor2021",
+      "hdr": "shp",
+      "dat": "shp"
+    },
+    "srccomp": {
+      "sentinel-tiles": {
+        "source": "ESA",
+        "product": "sentineltiles",
+        "content": "mgrs",
+        "layerid": "sentinel-tiles",
+        "prefix": "sentinel-tiles",
+        "suffix": "global",
+        "system": "ancillary"
+      }
+    }
+  }
+}

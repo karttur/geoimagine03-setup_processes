@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='utf-8'?>
+<organize>
+	<userproj userid = 'karttur' projectid = 'karttur' tractid= 'karttur' system = 'ancillary'></userproj>
+
+	<process processid ='organizeancillary' dsversion = '3.0'>
+		<parameters importdef = 'shp'
+			epsg = '4326'
+			instid = 'USGS'
+			dsname  = 'USGSWRS'
+			source = 'USGS'
+			dsversion = "1"
+			accessdate = "20050320"
+			regionid = 'globe'
+			regioncat = 'globe'
+			datadir ='USGS'
+			datafile =''
+			metapath =""
+    	dataurl = ""
+    	metaurl= ""
+    	title = "USGS Landsat WRS"
+    	label = "USGS Landsat WRS scene positions"
+		> </parameters>
+
+		<srcpath volume = "OPUS/ANCILIMPORT" hdrfiletype = "shp" datfiletype = ""></srcpath>
+		<dstpath volume = "OPUS" hdrfiletype = "shp" datfiletype = ""></dstpath>
+
+    	<srcraw id='wrs1ascdesc'
+    		datadir = "USGS/wrs1_asc_desc"
+    		datafile = "wrs1_asc_desc"
+    		datalayer = "wrs1_asc_desc"
+    		dsversion = "1"
+    		accessdate = "20160923"
+    		product = 'WRS'
+    		theme = "landsat"
+    		subtheme = "scene position"
+    		copyright = ""
+    		title = "Landsat WRS1 ascending and descending scene positions"
+    		label = "Landsat WRS1 ascending and descending scene positions"
+    	></srcraw>
+    	<dstcomp>
+			<wrs1ascdesc masked='Y'  measure = "N" source = "USGS" product = "wrs"
+			     folder = 'wrspos' band = "wrs1ascdesc" prefix = "wrs1ascdesc" suffix = "0"
+			     scalefac = "1" offsetadd = "0" dataunit = "boundary" celltype = 'vector' cellnull = '-32768'>
+			</wrs1ascdesc>
+		</dstcomp>
+
+    	<srcraw id='wrs2ascdesc'
+    		datadir = "USGS/wrs2_asc_desc"
+    		datafile = "wrs2_asc_desc"
+    		datalayer = "wrs2_asc_desc"
+    		dsversion = "1"
+    		accessdate = "20160923"
+    		theme = "landsat"
+    		subtheme = "scene position"
+    		copyright = ""
+    		title = "Landsat WRS2 ascending and descending scene positions"
+    		label = "Landsat WRS2 ascending and descending scene positions"
+    	></srcraw>
+    	<dstcomp>
+			<wrs2ascdesc masked='Y'  measure = "N" source = "USGS" product = "wrs"
+			     folder = 'wrspos' band = "wrs2ascdesc" prefix = "wrs2ascdesc" suffix = "0"
+			     scalefac = "1" offsetadd = "0" dataunit = "boundary" celltype = 'vector' cellnull = '-32768'>
+			</wrs2ascdesc>
+		</dstcomp>
+
+		<srcraw id='wrs1desc'
+			datadir = "USGS/wrs1_descending"
+    		datafile = "wrs1_descending"
+    		datalayer = "wrs1_descending"
+    		dsversion = "1"
+    		accessdate = "20160923"
+    		theme = "landsat"
+    		subtheme = "scene position"
+    		copyright = ""
+    		title = "Landsat WRS1 descending scene positions"
+    		label = "Landsat WRS1 descending scene positions"
+    	></srcraw>
+    	<dstcomp>
+			<wrs1desc masked='Y'  measure = "N" source = "USGS" product = "wrs"
+			     folder = 'wrspos' band = "wrs1desc" prefix = "wrs1desc" suffix = "0"
+			     scalefac = "1" offsetadd = "0" dataunit = "boundary" celltype = 'vector' cellnull = '-32768'>
+			</wrs1desc>
+		</dstcomp>
+
+		<srcraw id='wrs2desc'
+			datadir = "USGS/wrs2_descending"
+    		datafile = "wrs2_descending"
+    		datalayer = "wrs2_descending"
+    		dsversion = "1"
+    		accessdate = "20160923"
+    		theme = "landsat"
+    		subtheme = "scene position"
+    		copyright = ""
+    		title = "Landsat WRS2 descending scene positions"
+    		label = "Landsat WRS2 descending scene positions"
+    	></srcraw>
+    	<dstcomp>
+			<wrs2desc masked='Y'  measure = "N" source = "USGS" product = "wrs"
+			     folder = 'wrspos' band = "wrs2desc" prefix = "wrs2desc" suffix = "0"
+			     scalefac = "1" offsetadd = "0" dataunit = "boundary" celltype = 'vector' cellnull = '-32768'>
+			</wrs2desc>
+		</dstcomp>
+
+    </process>
+</organize>

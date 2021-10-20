@@ -1,0 +1,242 @@
+{
+  "postgresdb": {
+    "db": "geoimagine"
+  },
+  "userproject": {
+    "userid": "karttur",
+    "projectid": "karttur",
+    "tractid": "karttur",
+    "siteid": "*",
+    "plotid": "*",
+    "system": "ancillary"
+  },
+  "period": {
+    "startyear": 2014,
+    "endyear": 2014,
+    "timestep": "singleyear"
+  },
+  "process": [
+    {
+      "processid": "OrganizeAncillary",
+      "overwrite": false,
+      "parameters": {
+        "importcode": "shp",
+        "epsg": "4326",
+        "orgid": "karttur",
+        "dsname": "globalROI",
+        "dsversion": "1.0",
+        "accessdate": "20170320",
+        "regionid": "globe",
+        "regioncat": "globe",
+        "dataurl": "",
+        "metaurl": "",
+        "title": "Global default regions",
+        "label": "Global default regions based on countries and continents"
+      },
+      "srcpath": {
+        "volume": ".",
+        "hdr": "shp"
+      },
+      "dstpath": {
+        "volume": "geoinfo2021",
+        "hdr": "shp"
+      },
+      "srcraw": [
+        {
+          "country": {
+            "datadir": "data",
+            "datafile": "countries_karttur_global_2014",
+            "datalayer": "countries",
+            "title": "Global countries (with iso-codes)",
+            "label": "Cleaned vectors from ShareGeo representing global countries for 2014"
+          }
+        },
+        {
+          "country-continent": {
+            "datadir": "data",
+            "datafile": "countries-continents_karttur_global_2014",
+            "datalayer": "countries-continents",
+            "title": "Global countries (with iso-codes)",
+            "label": "Cleaned vectors from ShareGeo representing global countries for 2014"
+          }
+        },
+        {
+          "continent-subregions": {
+            "datadir": "data",
+            "datafile": "continent-subregions_karttur_global_2014",
+            "datalayer": "continent-subregions",
+            "title": "Global countries (with iso-codes)",
+            "label": "Cleaned vectors from ShareGeo representing global countries for 2014"
+          }
+        },
+        {
+          "continents": {
+            "datadir": "data",
+            "datafile": "continents_karttur_global_2014",
+            "datalayer": "continents",
+            "title": "Global countries (with iso-codes)",
+            "label": "Cleaned vectors from ShareGeo representing global countries for 2014"
+          }
+        },
+        {
+          "marine-countries": {
+            "datadir": "data",
+            "datafile": "marine-countries_karttur_2014",
+            "datalayer": "marine-countries",
+            "title": "Global countries (with iso-codes)",
+            "label": "Cleaned vectors from ShareGeo representing global countries for 2014"
+          }
+        },
+        {
+          "marine-continent-countries": {
+            "datadir": "data",
+            "datafile": "marine-continent-countries_karttur_2014",
+            "datalayer": "marine-continent-countries",
+            "title": "Global countries (with iso-codes)",
+            "label": "Cleaned vectors from ShareGeo representing global countries for 2014"
+          }
+        },
+        {
+          "marine-continent-subregions": {
+            "datadir": "data",
+            "datafile": "marine-continent-subregions_karttur_2014",
+            "datalayer": "marine-continent-subregions",
+            "title": "Global countries (with iso-codes)",
+            "label": "Cleaned vectors from ShareGeo representing global countries for 2014"
+          }
+        },
+        {
+          "marine-continents": {
+            "datadir": "data",
+            "datafile": "marine-continents_karttur_2014",
+            "datalayer": "marine-continents",
+            "title": "Global countries (with iso-codes)",
+            "label": "Cleaned vectors from ShareGeo representing global countries for 2014"
+          }
+        }
+      ],
+      "dstcomp": [
+        {
+          "country": {
+            "source": "karttur",
+            "product": "karttur",
+            "content": "defaultregions",
+            "layerid": "country",
+            "prefix": "country",
+            "suffix": "0",
+            "dataunit": "boundary",
+            "celltype": "vector",
+            "cellnull": "-32768",
+            "masked": "Y",
+            "measure": "N"
+          }
+        },
+        {
+          "country-continent": {
+            "masked": "Y",
+            "measure": "N",
+            "source": "karttur",
+            "product": "karttur",
+            "content": "defaultregions",
+            "layerid": "country-continent",
+            "prefix": "country-continent",
+            "suffix": "0",
+            "dataunit": "boundary",
+            "celltype": "vector",
+            "cellnull": "-32768"
+          }
+        },
+        {
+          "continent-subregions": {
+            "masked": "Y",
+            "measure": "N",
+            "source": "karttur",
+            "product": "karttur",
+            "content": "defaultregions",
+            "layerid": "continent-subregions",
+            "prefix": "continent-subregions",
+            "suffix": "0",
+            "dataunit": "boundary",
+            "celltype": "vector",
+            "cellnull": "-32768"
+          }
+        },
+        {
+          "continents": {
+            "masked": "Y",
+            "measure": "N",
+            "source": "karttur",
+            "product": "karttur",
+            "content": "defaultregions",
+            "layerid": "continents",
+            "prefix": "continents",
+            "suffix": "0",
+            "dataunit": "boundary",
+            "celltype": "vector",
+            "cellnull": "-32768"
+          }
+        },
+        {
+          "marine-countries": {
+            "masked": "Y",
+            "measure": "N",
+            "source": "karttur",
+            "product": "karttur",
+            "content": "defaultregions",
+            "layerid": "marine-countries",
+            "prefix": "marine-countries",
+            "suffix": "0",
+            "dataunit": "boundary",
+            "celltype": "vector",
+            "cellnull": "-32768"
+          }
+        },
+        {
+          "marine-continent-countries": {
+            "masked": "Y",
+            "measure": "N",
+            "source": "karttur",
+            "product": "karttur",
+            "content": "defaultregions",
+            "layerid": "marine-continent-countries",
+            "prefix": "marine-continent-countries",
+            "suffix": "0",
+            "dataunit": "boundary",
+            "celltype": "vector",
+            "cellnull": "-32768"
+          }
+        },
+        {
+          "marine-continent-subregions": {
+            "masked": "Y",
+            "measure": "N",
+            "source": "karttur",
+            "product": "karttur",
+            "content": "defaultregions",
+            "layerid": "marine-continent-subregions",
+            "prefix": "marine-continent-subregions",
+            "suffix": "0",
+            "dataunit": "boundary",
+            "celltype": "vector",
+            "cellnull": "-32768"
+          }
+        },
+        {
+          "marine-continents": {
+            "masked": "Y",
+            "measure": "N",
+            "source": "karttur",
+            "product": "karttur",
+            "content": "defaultregions",
+            "layerid": "marine-continents",
+            "prefix": "marine-continents",
+            "suffix": "0",
+            "dataunit": "boundary",
+            "celltype": "vector",
+            "cellnull": "-32768"
+          }
+        }
+      ]
+    }
+  ]
+}

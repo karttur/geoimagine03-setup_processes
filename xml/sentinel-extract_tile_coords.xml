@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<organize>
+	<userproj userid = 'karttur' projectid = 'karttur' tractid= 'karttur' siteid = '*' plotid = '*' system = 'sentinel'></userproj>
+	<period timestep='static'></period>
+	<process processid ='extractsentineltilecoords' dsversion = '3.0'>
+		<parameters centroid='False'></parameters>
+		<srcpath volume = "karttur" hdrfiletype = "shp" datfiletype = "shp"></srcpath>
+		<srccomp>
+			<sentinel-tiles source = "ESA" product = "sentineltiles" folder = "mgrs" band = "sentinel-tiles" prefix = "sentinel-tiles" suffix = "global" system='ancillary'>
+			</sentinel-tiles>
+		</srccomp>
+	</process>
+
+</organize>

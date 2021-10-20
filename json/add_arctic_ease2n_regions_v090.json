@@ -1,0 +1,155 @@
+{
+  "userproject": {
+    "userid": "karttur",
+    "projectid": "karttur",
+    "tractid": "karttur",
+    "siteid": "*",
+    "plotid": "*",
+    "system": "ease2n"
+  },
+  "period": {
+    "timestep": "static"
+  },
+  "process": [
+    {
+      "processid": "DefaultRegionFromCoords",
+      "overwrite": false,
+      "parameters": {
+        "regioncat": "global",
+        "regionid": "ease2n",
+        "regionname": "system default region",
+        "parentid": "global",
+        "parentcat": "global",
+        "epsg": 6931,
+        "stratum": "1",
+        "minx": -9000000,
+        "miny": -9000000,
+        "maxx": 9000000,
+        "maxy": 9000000,
+        "version": "1.0",
+        "title": "system default region EASE-grid 6931",
+        "label": "system default region for Northern circumpolar EASE-grid 6931."
+      },
+      "dstpath": {
+        "volume": "Ancillary"
+      }
+    },
+    {
+      "processid": "DefaultRegionFromCoords",
+      "overwrite": false,
+      "parameters": {
+        "regioncat": "global",
+        "regionid": "northlandease2n",
+        "regionname": "Northern circumpolar landmass EASE-grid 6931",
+        "parentid": "global",
+        "parentcat": "global",
+        "epsg": 6931,
+        "stratum": "1",
+        "minx": -5400000,
+        "miny": -5400000,
+        "maxx": 5400000,
+        "maxy": 4500000,
+        "version": "1.0",
+        "title": "Northern circumpolar landmass EASE-grid 6931",
+        "label": "Tile fitted region for Northern circumpolar landmass EASE-grid 6931."
+      },
+      "dstpath": {
+        "volume": "Ancillary"
+      }
+    },
+    {
+      "processid": "DefaultRegionFromCoords",
+      "overwrite": false,
+      "parameters": {
+        "regioncat": "global",
+        "regionid": "arcticdemease2n",
+        "regionname": "Arctic circumpolar DEM EASE-grid 6931",
+        "parentid": "globe",
+        "parentcat": "globe",
+        "epsg": 6931,
+        "stratum": "1",
+        "minx": -3500000,
+        "miny": -3500000,
+        "maxx": 3500000,
+        "maxy": 4400000,
+        "version": "1.0",
+        "title": "Global arctic DEM in EASE-grid 6931",
+        "label": "Region covering 60 to 90 degrees north, coinciding with the core region of the Arctic DEM."
+      },
+      "dstpath": {
+        "volume": "Ancillary"
+      }
+    },
+    {
+      "processid": "DefaultRegionFromCoords",
+      "overwrite": false,
+      "parameters": {
+        "regioncat": "global",
+        "regionid": "nhemispherease2n",
+        "regionname": "Northern hemisphere EASE-grid 6931",
+        "parentid": "globe",
+        "parentcat": "globe",
+        "epsg": 6931,
+        "stratum": "1",
+        "minx": -9000000,
+        "miny": -9000000,
+        "maxx": 9000000,
+        "maxy": 9000000,
+        "version": "1.0",
+        "title": "Northern hemisphere EASE-grid 6931",
+        "label": "Northern hemisphere EASE-grid 6931."
+      },
+      "dstpath": {
+        "volume": "Ancillary"
+      }
+    },
+    {
+      "processid": "DefaultRegionFromCoords",
+      "overwrite": false,
+      "parameters": {
+        "regioncat": "global",
+        "regionid": "panarcticease2n",
+        "regionname": "Pan Arctic EASE-grid 6931",
+        "parentid": "globe",
+        "parentcat": "globe",
+        "epsg": 6931,
+        "stratum": "1",
+        "minx": -4500000,
+        "miny": -4500000,
+        "maxx": 4500000,
+        "maxy": 4500000,
+        "version": "1.0",
+        "title": "Pan Arctic EASE-grid 6931",
+        "label": "Pan Arctic EASE-grid 6931."
+      },
+      "dstpath": {
+        "volume": "Ancillary"
+      }
+    },
+    {
+      "processid": "LinkDefaultRegionTiles",
+      "version": "0.9",
+      "verbose": 2,
+      "parameters": {
+        "defregmask": "global"
+      },
+      "srcpath": {
+        "volume": "Ancillary",
+        "hdr": "shp",
+        "dat": "shp"
+      },
+      "srccomp": [
+        {
+          "regions": {
+            "source": "karttur",
+            "product": "roi",
+            "content": "pubroi",
+            "layerid": "defreg",
+            "prefix": "defreg",
+            "suffix": "v010"
+          }
+        }
+      ]
+    }
+  ]
+}

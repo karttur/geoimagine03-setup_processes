@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<searchdatapool>
+	<userproj userid = 'karttur' projectid = 'karttur' tractid= 'karttur' siteid = '*' plotid = '*' system = 'modis'></userproj>
+	<period startyear = '2018' endyear = '2020' timestep='8D'></period>
+	
+	<process processid ='searchDataPool' dsversion = '1.3'>
+		<parameters product="MCD43A4" version="006" serverurl="http://e4ftl01.cr.usgs.gov" ></parameters>
+		<dstpath volume = "None"></dstpath>
+	</process>
+	
+	<process processid ='searchDataPool' dsversion = '1.3'>
+		<parameters product="MYD09A1" version="006" serverurl="http://e4ftl01.cr.usgs.gov" ></parameters>
+		<dstpath volume = "None"></dstpath>
+	</process>
+
+	<process processid ='searchDataPool' dsversion = '1.3'>
+		<parameters product="MOD09A1" version="006" serverurl="http://e4ftl01.cr.usgs.gov" ></parameters>
+		<dstpath volume = "None"></dstpath>
+	</process>
+		
+</searchdatapool>
+

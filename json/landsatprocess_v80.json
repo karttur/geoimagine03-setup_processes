@@ -1,0 +1,4638 @@
+{
+  "postgresdb": {
+    "db": "geoimagine"
+  },
+  "userproject": {
+    "userid": "karttur",
+    "projectid": "karttur",
+    "tractid": "karttur",
+    "siteid": "*",
+    "plotid": "*",
+    "system": "system"
+  },
+  "process": [
+    {
+      "processid": "addrootproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "LandsatProc",
+        "title": "Manage landsat processes",
+        "label": "Specific landsat processes (order, download, organize)"
+      }
+    },
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "LandsatProc",
+        "subprocid": "LandsatBulkMetaUrl",
+        "version": "0.8.0",
+        "minuserstratum": 10,
+        "title": "Manage the url link to the USGS bulk metadata",
+        "label": "Only required if the url link to the USGS bulk metadata changes"
+      },
+      "system": {
+        "procsys": {
+          "system": "landsat",
+          "srcsystem": "landsat",
+          "dstsystem": "landsat",
+          "srcdivision": "scenes",
+          "dstdivision": "scenes",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      },
+      "node": {
+        "parent": "process",
+        "element": "parameters",
+        "parameter": [
+          {
+            "paramid": "collection",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": "",
+            "setvalue": [
+              {
+                "value": "ARD",
+                "label": "ARD"
+              },
+              {
+                "value": "Landsat1",
+                "label": "Landsat1"
+              }
+            ]
+          },
+          {
+            "paramid": "level",
+            "paramtyp": "integer",
+            "required": true,
+            "defaultvalue": "1"
+          },
+          {
+            "paramid": "sensor",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": "",
+            "setvalue": [
+              {
+                "value": "all",
+                "label": "All sensors"
+              },
+              {
+                "value": "olitirs",
+                "label": "Landsat 8 OLI/TIRS"
+              },
+              {
+                "value": "etm",
+                "label": "Landsat 7 ETM+)"
+              },
+              {
+                "value": "tm",
+                "label": "Landsat 4 TM"
+              },
+              {
+                "value": "mss",
+                "label": "Landsat 5 TM"
+              }
+            ]
+          },
+          {
+            "paramid": "label",
+            "paramtyp": "text",
+            "required": false,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "xmlurl",
+            "paramtyp": "url",
+            "required": false,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "csvurl",
+            "paramtyp": "url",
+            "required": false,
+            "defaultvalue": ""
+          }
+        ]
+      }
+    },
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "LandsatProc",
+        "subprocid": "DownloadBulkMeta",
+        "version": "0.8.0",
+        "minuserstratum": "10",
+        "title": "Download USGS bulk metadata",
+        "label": "Download bulk metadata from USGS per collection, level and sensor"
+      },
+      "system": {
+        "procsys": {
+          "system": "landsat",
+          "srcsystem": "landsat",
+          "dstsystem": "landsat",
+          "srcdivision": "scenes",
+          "dstdivision": "scenes",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      },
+      "node": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": [
+            {
+              "paramid": "collection",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "",
+              "setvalue": [
+                {
+                  "value": "ARD",
+                  "label": "ARD"
+                },
+                {
+                  "value": "Landsat1",
+                  "label": "Landsat1"
+                }
+              ]
+            },
+            {
+              "paramid": "level",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": "1"
+            },
+            {
+              "paramid": "sensor",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "",
+              "setvalue": [
+                {
+                  "value": "all",
+                  "label": "All sensors"
+                },
+                {
+                  "value": "olitirs",
+                  "label": "Landsat 8 OLI/TIRS"
+                },
+                {
+                  "value": "etm",
+                  "label": "Landsat 7 ETM+)"
+                },
+                {
+                  "value": "tm",
+                  "label": "Landsat 4 TM"
+                },
+                {
+                  "value": "mss",
+                  "label": "Landsat 5 TM"
+                }
+              ]
+            },
+            {
+              "paramid": "filetype",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "csv",
+              "setvalue": [
+                {
+                  "value": "csv",
+                  "label": "gz compresssed csv file"
+                },
+                {
+                  "value": "xml",
+                  "label": "gz compresssed xml file"
+                }
+              ]
+            },
+            {
+              "paramid": "daysago",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "7"
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "dstpath",
+          "parameter": {
+            "paramid": "volume",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          }
+        }
+      ]
+    },
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "LandsatProc",
+        "subprocid": "LandsatMetaDb",
+        "version": "0.8.0",
+        "minuserstratum": "10",
+        "title": "Define landsat metadata db and capture",
+        "label": "Create db tables and columns and link csv column data to db"
+      },
+      "system": {
+        "procsys": {
+          "system": "landsat",
+          "srcsystem": "landsat",
+          "dstsystem": "landsat",
+          "srcdivision": "scenes",
+          "dstdivision": "scenes",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      },
+      "node": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": [
+            {
+              "paramid": "sensat",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "L**"
+            },
+            {
+              "paramid": "sensor",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "",
+              "setvalue": [
+                {
+                  "value": "ARD",
+                  "label": "ARD"
+                },
+                {
+                  "value": "OLITIRS",
+                  "label": "Landsat 8 OLI/TIRS"
+                },
+                {
+                  "value": "ETM",
+                  "label": "Landsat 7 ETM+)"
+                },
+                {
+                  "value": "TM",
+                  "label": "Landsat TM"
+                },
+                {
+                  "value": "MSS",
+                  "label": "Landsat MSS"
+                }
+              ]
+            },
+            {
+              "paramid": "filetype",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "csv",
+              "setvalue": [
+                {
+                  "value": "csv",
+                  "label": "csv file"
+                },
+                {
+                  "value": "xml",
+                  "label": "xml file"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "column",
+          "parameter": [
+            {
+              "paramid": "csv",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "table",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "",
+              "setvalue": [
+                {
+                  "value": "main",
+                  "label": "main table"
+                },
+                {
+                  "value": "sub",
+                  "label": "main table"
+                },
+                {
+                  "value": "geo",
+                  "label": "main table"
+                },
+                {
+                  "value": "url",
+                  "label": "main table"
+                },
+                {
+                  "value": "update",
+                  "label": "main table"
+                },
+                {
+                  "value": "mss",
+                  "label": "main table"
+                },
+                {
+                  "value": "tm",
+                  "label": "main table"
+                },
+                {
+                  "value": "etm",
+                  "label": "main table"
+                },
+                {
+                  "value": "etmcal",
+                  "label": "main table"
+                },
+                {
+                  "value": "olitirs",
+                  "label": "main table"
+                }
+              ]
+            },
+            {
+              "paramid": "column",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "type",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "",
+              "setvalue": [
+                {
+                  "value": "char",
+                  "label": "character"
+                },
+                {
+                  "value": "varchar",
+                  "label": "character varying"
+                },
+                {
+                  "value": "integer",
+                  "label": "integer"
+                },
+                {
+                  "value": "real",
+                  "label": "real"
+                },
+                {
+                  "value": "double precision",
+                  "label": "double precision"
+                },
+                {
+                  "value": "bool",
+                  "label": "boolen"
+                },
+                {
+                  "value": "date",
+                  "label": "date"
+                }
+              ]
+            },
+            {
+              "paramid": "length",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "1",
+              "minmax": {
+                "min": "1",
+                "max": "255"
+              }
+            },
+            {
+              "paramid": "required",
+              "paramtyp": "bool",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "default",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "LandsatProc",
+        "subprocid": "InsertBulkMeta",
+        "version": "0.8.0",
+        "minuserstratum": "10",
+        "title": "Insert bulk metadata in db from downloaded bulk file",
+        "label": "Iterates over all items (rows or nodes) in a downloaded bulk meta data file "
+      },
+      "system": {
+        "procsys": {
+          "system": "landsat",
+          "srcsystem": "landsat",
+          "dstsystem": "landsat",
+          "srcdivision": "scenes",
+          "dstdivision": "scenes",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      },
+      "node": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": {
+            "paramid": "sensat",
+            "paramtyp": "text",
+            "required": false,
+            "defaultvalue": "L**"
+          }
+        },
+        {
+          "parent": "process",
+          "element": "srcpath",
+          "parameter": {
+            "paramid": "volume",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          }
+        }
+      ]
+    },
+    {
+      "processid": "addsubproc",
+      "delete": "Y",
+      "parameters": {
+        "rootprocid": "LandsatProc",
+        "subprocid": "DownloadLandsatSingleScene",
+        "version": "0.8.0",
+        "minuserstratum": "10",
+        "title": "Download Landsat scene from USGS",
+        "label": "ownload Landsat scene from USGS"
+      },
+      "system": {
+        "procsys": {
+          "system": "landsat",
+          "srcsystem": "landsat",
+          "dstsystem": "landsat",
+          "srcdivision": "scenes",
+          "dstdivision": "scenes",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      },
+      "node": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": [
+            {
+              "paramid": "remoteuser",
+              "paramtyp": "string",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "serverurl",
+              "paramtyp": "string",
+              "required": false,
+              "defaultvalue": "https://e4ftl01.cr.usgs.gov"
+            },
+            {
+              "paramid": "asscript",
+              "paramtyp": "string",
+              "required": false,
+              "defaultvalue": "True"
+            },
+            {
+              "paramid": "downloaded",
+              "paramtyp": "boolean",
+              "required": false,
+              "defaultvalue": "False"
+            },
+            {
+              "paramid": "imgqualmin",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "7",
+              "setvalue": {
+                "value": "0",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "collnr",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "0",
+              "setvalue": {
+                "value": "0",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "geormse",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "0",
+              "setvalue": {
+                "value": "0",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "datatypel1",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "satelnr",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "0",
+              "setvalue": {
+                "value": "0",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "sensorid",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "maxcloudcov",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "100"
+            },
+            {
+              "paramid": "maxcloudcovland",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "30"
+            },
+            {
+              "paramid": "wrspath",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "wrsrow",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "dstpath",
+          "parameter": {
+            "paramid": "volume",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          }
+        }
+      ]
+    },
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "LandsatProc",
+        "subprocid": "SearchLandsatSingleScene",
+        "version": "0.8.0",
+        "minuserstratum": "10",
+        "title": "Download Landsat scene from USGS",
+        "label": "ownload Landsat scene from USGS"
+      },
+      "system": {
+        "procsys": {
+          "system": "landsat",
+          "srcsystem": "landsat",
+          "dstsystem": "landsat",
+          "srcdivision": "scenes",
+          "dstdivision": "scenes",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      },
+      "node": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": [
+            {
+              "paramid": "remoteuser",
+              "paramtyp": "string",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "serverurl",
+              "paramtyp": "string",
+              "required": false,
+              "defaultvalue": "https://e4ftl01.cr.usgs.gov"
+            },
+            {
+              "paramid": "asscript",
+              "paramtyp": "string",
+              "required": false,
+              "defaultvalue": "True"
+            },
+            {
+              "paramid": "download",
+              "paramtyp": "boolean",
+              "required": false,
+              "defaultvalue": "True"
+            },
+            {
+              "paramid": "imgqualmin",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "7",
+              "setvalue": {
+                "value": "0",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "collnr",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "0",
+              "setvalue": {
+                "value": "0",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "geormse",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "0",
+              "setvalue": {
+                "value": "0",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "datatypel1",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "satelnr",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "0",
+              "setvalue": {
+                "value": "0",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "sensorid",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "maxcloudcov",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "100"
+            },
+            {
+              "paramid": "maxcloudcovland",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "30"
+            },
+            {
+              "paramid": "wrspath",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "wrsrow",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "dstpath",
+          "parameter": {
+            "paramid": "volume",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          }
+        }
+      ]
+    },
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "LandsatProc",
+        "subprocid": "DownloadLandsatESPAbulkOrder",
+        "version": "0.8.0",
+        "minuserstratum": "10",
+        "title": "Download ESPA bulk order from order HTML",
+        "label": "Download ESPA bulk order from order HTML"
+      },
+      "system": {
+        "procsys": {
+          "system": "landsat",
+          "srcsystem": "landsat",
+          "dstsystem": "landsat",
+          "srcdivision": "scenes",
+          "dstdivision": "scenes",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      },
+      "node": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": [
+            {
+              "paramid": "asscript",
+              "paramtyp": "string",
+              "required": false,
+              "defaultvalue": "True"
+            },
+            {
+              "paramid": "htmlfn",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "all"
+            },
+            {
+              "paramid": "organize",
+              "paramtyp": "bool",
+              "required": false,
+              "defaultvalue": "False"
+            },
+            {
+              "paramid": "explode",
+              "paramtyp": "bool",
+              "required": false,
+              "defaultvalue": "False"
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srcpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdrfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "html"
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "dstpath",
+          "parameter": {
+            "paramid": "volume",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          }
+        }
+      ]
+    },
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "LandsatProc",
+        "subprocid": "OrganizeLandsat",
+        "version": "0.8.0",
+        "minuserstratum": "10",
+        "title": "Organize downloaded landsat scenes>",
+        "label": "Moves downloaded landsat scenes in place while registering to database"
+      },
+      "system": {
+        "procsys": {
+          "system": "landsat",
+          "srcsystem": "landsat",
+          "dstsystem": "export",
+          "srcdivision": "scenes",
+          "dstdivision": "scenes",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      },
+      "node": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": {
+            "element": "parameters",
+            "paramid": "wrs",
+            "paramtyp": "int",
+            "required": true,
+            "defaultvalue": "",
+            "setvalue": [
+              {
+                "value": "1",
+                "label": "WRS 1"
+              },
+              {
+                "value": "2",
+                "label": "WRS 2"
+              }
+            ]
+          }
+        },
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": {
+            "element": "parameters",
+            "paramid": "replaceold",
+            "paramtyp": "bool",
+            "required": false,
+            "defaultvalue": "True"
+          }
+        },
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": {
+            "element": "parameters",
+            "paramid": "redundant",
+            "paramtyp": "bool",
+            "required": false,
+            "defaultvalue": "False"
+          }
+        },
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": {
+            "paramid": "sensat",
+            "paramtyp": "text",
+            "required": false,
+            "defaultvalue": "*",
+            "setvalue": [
+              {
+                "value": "LC8",
+                "label": "Landsat 8 OLI/TIRS"
+              },
+              {
+                "value": "LE7",
+                "label": "Landsat 7 ETM+)"
+              },
+              {
+                "value": "LT4",
+                "label": "Landsat 4 TM"
+              },
+              {
+                "value": "LT5",
+                "label": "Landsat 5 TM"
+              },
+              {
+                "value": "LM1",
+                "label": "Landsat 1 MSS"
+              },
+              {
+                "value": "LM2",
+                "label": "Landsat 2 MSS"
+              },
+              {
+                "value": "LM3",
+                "label": "Landsat 3 MSS"
+              },
+              {
+                "value": "LM4",
+                "label": "Landsat 4 MSS"
+              },
+              {
+                "value": "LM5",
+                "label": "Landsat 5 MSS"
+              },
+              {
+                "value": "*",
+                "label": "all downloaded scenes"
+              }
+            ]
+          }
+        },
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": {
+            "element": "parameters",
+            "paramid": "dataunit",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": "srfi",
+            "setvalue": [
+              {
+                "value": "reflectance",
+                "label": "surfance reflectance factor index"
+              },
+              {
+                "value": "dn",
+                "label": "digital number"
+              }
+            ]
+          }
+        },
+        {
+          "parent": "process",
+          "element": "srcpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdrfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "tif"
+            },
+            {
+              "paramid": "datfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "dstpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdrfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "tif"
+            },
+            {
+              "paramid": "datfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srccomp",
+          "parameter": [
+            {
+              "paramid": "source",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "product",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "folder",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "download"
+            },
+            {
+              "paramid": "band",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "prefix",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "suffix",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "masked",
+              "paramtyp": "bool",
+              "required": false,
+              "defaultvalue": "N"
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srccomp",
+          "parameter": [
+            {
+              "paramid": "source",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "product",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "folder",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "original"
+            },
+            {
+              "paramid": "band",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "prefix",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "suffix",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "masked",
+              "paramtyp": "bool",
+              "required": false,
+              "defaultvalue": "N"
+            },
+            {
+              "paramid": "cellnull",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "-9999"
+            },
+            {
+              "paramid": "celltype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "scalefac",
+              "paramtyp": "real",
+              "required": false,
+              "defaultvalue": "1"
+            },
+            {
+              "paramid": "offsetadd",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "dataunit",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "LandsatProc",
+        "subprocid": "ExplodeLandsatSingleScene",
+        "version": "0.8.0",
+        "minuserstratum": "10",
+        "title": "Download Landsat scene from USGS",
+        "label": "ownload Landsat scene from USGS"
+      },
+      "system": {
+        "procsys": {
+          "system": "landsat",
+          "srcsystem": "landsat",
+          "dstsystem": "landsat",
+          "srcdivision": "scenes",
+          "dstdivision": "scenes",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      },
+      "node": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": [
+            {
+              "paramid": "asscript",
+              "paramtyp": "string",
+              "required": false,
+              "defaultvalue": "True"
+            },
+            {
+              "paramid": "source",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "product",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "collcat",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "collnr",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "0",
+              "setvalue": {
+                "value": "0",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "proccat",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "",
+              "setvalue": [
+                {
+                  "value": "DN",
+                  "label": "DN"
+                },
+                {
+                  "value": "TOA",
+                  "label": "TOA"
+                },
+                {
+                  "value": "SRFI",
+                  "label": "SRFI"
+                }
+              ]
+            },
+            {
+              "paramid": "wrspath",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "wrsrow",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srcpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdrfiletype",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "datfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "dstpath",
+          "parameter": {
+            "paramid": "volume",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          }
+        }
+      ]
+    },
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "LandsatProc",
+        "subprocid": "GetMetaLandsatSingleScene",
+        "version": "0.8.0",
+        "minuserstratum": "10",
+        "title": "Download Landsat scene from USGS",
+        "label": "Download Landsat scene from USGS"
+      },
+      "system": {
+        "procsys": {
+          "system": "landsat",
+          "srcsystem": "landsat",
+          "dstsystem": "landsat",
+          "srcdivision": "scenes",
+          "dstdivision": "NA",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      },
+      "node": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": [
+            {
+              "paramid": "source",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "product",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "collcat",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "collnr",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "0",
+              "setvalue": {
+                "value": "0",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "proccat",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "",
+              "setvalue": [
+                {
+                  "value": "DN",
+                  "label": "DN"
+                },
+                {
+                  "value": "TOA",
+                  "label": "TOA"
+                },
+                {
+                  "value": "SRFI",
+                  "label": "SRFI"
+                }
+              ]
+            },
+            {
+              "paramid": "wrspath",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "wrsrow",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srcpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdrfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "txt"
+            },
+            {
+              "paramid": "datfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "LandsatProc",
+        "subprocid": "TOARFILandsatSingleScene",
+        "version": "0.8.0",
+        "minuserstratum": "10",
+        "title": "Download Landsat scene from USGS",
+        "label": "ownload Landsat scene from USGS"
+      },
+      "system": {
+        "procsys": {
+          "system": "landsat",
+          "srcsystem": "landsat",
+          "dstsystem": "landsat",
+          "srcdivision": "scenes",
+          "dstdivision": "scenes",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      },
+      "node": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": [
+            {
+              "paramid": "method",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "reflgainbias",
+              "setvalue": [
+                {
+                  "value": "paris",
+                  "label": "following jack paris"
+                },
+                {
+                  "value": "reflgainbias",
+                  "label": "reflectance gain and bias"
+                },
+                {
+                  "value": "radqcal",
+                  "label": "using radiance and quantization level"
+                }
+              ]
+            },
+            {
+              "paramid": "source",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "product",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "collcat",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "collnr",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "0",
+              "setvalue": {
+                "value": "0",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "proccat",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "DN",
+              "setvalue": [
+                {
+                  "value": "DN",
+                  "label": "DN"
+                },
+                {
+                  "value": "TOA",
+                  "label": "TOA"
+                },
+                {
+                  "value": "SRFI",
+                  "label": "SRFI"
+                }
+              ]
+            },
+            {
+              "paramid": "factor",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "10000"
+            },
+            {
+              "paramid": "cellnull",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "-32768"
+            },
+            {
+              "paramid": "celltype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "INT16"
+            },
+            {
+              "paramid": "dataunit",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "reflectance"
+            },
+            {
+              "paramid": "scalefac",
+              "paramtyp": "real",
+              "required": false,
+              "defaultvalue": "0.0001"
+            },
+            {
+              "paramid": "offsetadd",
+              "paramtyp": "real",
+              "required": false,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "measure",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "R"
+            },
+            {
+              "paramid": "suffix",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "eemeta"
+            },
+            {
+              "paramid": "wrspath",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "wrsrow",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srcpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdrfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "tif"
+            },
+            {
+              "paramid": "datfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "dstpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdrfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "tif"
+            },
+            {
+              "paramid": "datfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "LandsatProc",
+        "subprocid": "DNtoSRFILandsatSingleScene",
+        "version": "0.8.0",
+        "minuserstratum": "10",
+        "title": "Download Landsat scene from USGS",
+        "label": "ownload Landsat scene from USGS"
+      },
+      "system": {
+        "procsys": {
+          "system": "landsat",
+          "srcsystem": "landsat",
+          "dstsystem": "landsat",
+          "srcdivision": "scenes",
+          "dstdivision": "scenes",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      },
+      "node": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": [
+            {
+              "paramid": "method",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "reflgainbias",
+              "setvalue": [
+                {
+                  "value": "paris",
+                  "label": "following jack paris"
+                },
+                {
+                  "value": "reflgainbias",
+                  "label": "reflectance gain and bias"
+                },
+                {
+                  "value": "radqcal",
+                  "label": "using radiance and quantization level"
+                }
+              ]
+            },
+            {
+              "paramid": "source",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "product",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "collcat",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "collnr",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "0",
+              "setvalue": {
+                "value": "0",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "proccat",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "DN",
+              "setvalue": [
+                {
+                  "value": "DN",
+                  "label": "DN"
+                },
+                {
+                  "value": "TOA",
+                  "label": "TOA"
+                },
+                {
+                  "value": "SRFI",
+                  "label": "SRFI"
+                }
+              ]
+            },
+            {
+              "paramid": "icRL",
+              "paramtyp": "float",
+              "required": false,
+              "defaultvalue": "1.34"
+            },
+            {
+              "paramid": "wtBL",
+              "paramtyp": "float",
+              "required": false,
+              "defaultvalue": "0.55114"
+            },
+            {
+              "paramid": "powFacC",
+              "paramtyp": "float",
+              "required": false,
+              "defaultvalue": "2.2714"
+            },
+            {
+              "paramid": "msfac",
+              "paramtyp": "float",
+              "required": false,
+              "defaultvalue": "1.0"
+            },
+            {
+              "paramid": "powfacmin",
+              "paramtyp": "float",
+              "required": false,
+              "defaultvalue": "1.77"
+            },
+            {
+              "paramid": "powfacmax",
+              "paramtyp": "float",
+              "required": false,
+              "defaultvalue": "3.27"
+            },
+            {
+              "paramid": "mindelta",
+              "paramtyp": "float",
+              "required": false,
+              "defaultvalue": "0.01"
+            },
+            {
+              "paramid": "maxdelta",
+              "paramtyp": "float",
+              "required": false,
+              "defaultvalue": "0.1"
+            },
+            {
+              "paramid": "max2delta",
+              "paramtyp": "float",
+              "required": false,
+              "defaultvalue": "1.0"
+            },
+            {
+              "paramid": "showplot",
+              "paramtyp": "boolean",
+              "required": false,
+              "defaultvalue": "False"
+            },
+            {
+              "paramid": "wrspath",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "wrsrow",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srcpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdrfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "tif"
+            },
+            {
+              "paramid": "datfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "dstpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdrfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "tif"
+            },
+            {
+              "paramid": "datfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "LandsatProc",
+        "subprocid": "LandsatTMDosSingleScene",
+        "version": "0.8.0",
+        "minuserstratum": "10",
+        "title": "Set DOS for single scene",
+        "label": "Set DOS for single scene and calculate srf path for atmospheric correction"
+      },
+      "system": {
+        "procsys": {
+          "system": "landsat",
+          "srcsystem": "landsat",
+          "dstsystem": "landsat",
+          "srcdivision": "scenes",
+          "dstdivision": "NA",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      },
+      "node": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": [
+            {
+              "paramid": "lsatprodid",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "wrspath",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "wrsrow",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "icRL",
+              "paramtyp": "float",
+              "required": false,
+              "defaultvalue": "1.34"
+            },
+            {
+              "paramid": "wtBL",
+              "paramtyp": "float",
+              "required": false,
+              "defaultvalue": "0.55114"
+            },
+            {
+              "paramid": "powFacC",
+              "paramtyp": "float",
+              "required": false,
+              "defaultvalue": "2.2714"
+            },
+            {
+              "paramid": "msfac",
+              "paramtyp": "float",
+              "required": false,
+              "defaultvalue": "1.0"
+            },
+            {
+              "paramid": "powfacmin",
+              "paramtyp": "float",
+              "required": false,
+              "defaultvalue": "1.77"
+            },
+            {
+              "paramid": "powfacmax",
+              "paramtyp": "float",
+              "required": false,
+              "defaultvalue": "3.27"
+            },
+            {
+              "paramid": "optimizep",
+              "paramtyp": "boolean",
+              "required": false,
+              "defaultvalue": "True"
+            },
+            {
+              "paramid": "bl",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "gl",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "rl",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "na",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "mb",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "mc",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srcpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdrfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "tif"
+            },
+            {
+              "paramid": "datfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "LandsatProc",
+        "subprocid": "SRFIfromDOSLandsatSingleScene",
+        "version": "0.8.0",
+        "minuserstratum": "10",
+        "title": "DOS to SRFI",
+        "label": "oDOS to SRFI"
+      },
+      "system": {
+        "procsys": {
+          "system": "landsat",
+          "srcsystem": "landsat",
+          "dstsystem": "landsat",
+          "srcdivision": "scenes",
+          "dstdivision": "scenes",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      },
+      "node": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": [
+            {
+              "paramid": "source",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "product",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "collcat",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "collnr",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "0",
+              "setvalue": {
+                "value": "0",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "proccat",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "DN",
+              "setvalue": [
+                {
+                  "value": "DN",
+                  "label": "DN"
+                },
+                {
+                  "value": "TOA",
+                  "label": "TOA"
+                },
+                {
+                  "value": "SRFI",
+                  "label": "SRFI"
+                }
+              ]
+            },
+            {
+              "paramid": "factor",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "10000"
+            },
+            {
+              "paramid": "cellnull",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "-32768"
+            },
+            {
+              "paramid": "celltype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "INT16"
+            },
+            {
+              "paramid": "dataunit",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "reflectance"
+            },
+            {
+              "paramid": "scalefac",
+              "paramtyp": "real",
+              "required": false,
+              "defaultvalue": "0.0001"
+            },
+            {
+              "paramid": "offsetadd",
+              "paramtyp": "real",
+              "required": false,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "measure",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "R"
+            },
+            {
+              "paramid": "suffix",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "auto"
+            },
+            {
+              "paramid": "icRL",
+              "paramtyp": "float",
+              "required": false,
+              "defaultvalue": "1.34"
+            },
+            {
+              "paramid": "wtBL",
+              "paramtyp": "float",
+              "required": false,
+              "defaultvalue": "0.55114"
+            },
+            {
+              "paramid": "powFacC",
+              "paramtyp": "float",
+              "required": false,
+              "defaultvalue": "2.2714"
+            },
+            {
+              "paramid": "msfac",
+              "paramtyp": "float",
+              "required": false,
+              "defaultvalue": "1.0"
+            },
+            {
+              "paramid": "powfacmin",
+              "paramtyp": "float",
+              "required": false,
+              "defaultvalue": "1.77"
+            },
+            {
+              "paramid": "powfacmax",
+              "paramtyp": "float",
+              "required": false,
+              "defaultvalue": "3.27"
+            },
+            {
+              "paramid": "mindelta",
+              "paramtyp": "float",
+              "required": false,
+              "defaultvalue": "0.01"
+            },
+            {
+              "paramid": "maxdelta",
+              "paramtyp": "float",
+              "required": false,
+              "defaultvalue": "0.1"
+            },
+            {
+              "paramid": "max2delta",
+              "paramtyp": "float",
+              "required": false,
+              "defaultvalue": "1.0"
+            },
+            {
+              "paramid": "showplot",
+              "paramtyp": "boolean",
+              "required": false,
+              "defaultvalue": "False"
+            },
+            {
+              "paramid": "powfacdef",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "multi",
+              "alt": [
+                "rl",
+                "multi",
+                "chavez",
+                "meanall",
+                "meanrlmulti",
+                "min",
+                "max"
+              ]
+            },
+            {
+              "paramid": "darkedgedef",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "multi",
+              "alt": [
+                "rl",
+                "multi",
+                "chavez",
+                "meanall",
+                "meanrlmulti",
+                "min",
+                "max",
+                "dos",
+                "paris"
+              ]
+            },
+            {
+              "paramid": "wrspath",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "wrsrow",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srcpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdrfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "tif"
+            },
+            {
+              "paramid": "datfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "dstpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdrfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "tif"
+            },
+            {
+              "paramid": "datfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "LandsatProc",
+        "subprocid": "RGBLandsatSingleScene",
+        "version": "0.8.0",
+        "minuserstratum": "10",
+        "title": "Landsat Scene pleasing RGB",
+        "label": "Landsat Scene pleasing RGB"
+      },
+      "system": {
+        "procsys": {
+          "system": "landsat",
+          "srcsystem": "landsat",
+          "dstsystem": "landsat",
+          "srcdivision": "scenes",
+          "dstdivision": "scenes",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      },
+      "node": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": [
+            {
+              "paramid": "source",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "product",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "collcat",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "collnr",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "0",
+              "setvalue": {
+                "value": "0",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "proccat",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "DN",
+              "setvalue": [
+                {
+                  "value": "DN",
+                  "label": "DN"
+                },
+                {
+                  "value": "TOA",
+                  "label": "TOA"
+                },
+                {
+                  "value": "SRFI",
+                  "label": "SRFI"
+                }
+              ]
+            },
+            {
+              "paramid": "theme",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "srfi",
+              "setvalue": [
+                {
+                  "value": "dn",
+                  "label": "DN"
+                },
+                {
+                  "value": "toa",
+                  "label": "TOA"
+                },
+                {
+                  "value": "srfi",
+                  "label": "SRFI"
+                },
+                {
+                  "value": "srfi-tc",
+                  "label": "SRFI"
+                }
+              ]
+            },
+            {
+              "paramid": "suffix",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "auto"
+            },
+            {
+              "paramid": "method",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "modifiedbrovey"
+            },
+            {
+              "paramid": "redpower",
+              "paramtyp": "real",
+              "required": false,
+              "defaultvalue": "0.90"
+            },
+            {
+              "paramid": "greenpower",
+              "paramtyp": "real",
+              "required": false,
+              "defaultvalue": "0.89"
+            },
+            {
+              "paramid": "bluepower",
+              "paramtyp": "real",
+              "required": false,
+              "defaultvalue": "0.83"
+            },
+            {
+              "paramid": "redlimit",
+              "paramtyp": "real",
+              "required": false,
+              "defaultvalue": "10000"
+            },
+            {
+              "paramid": "greenlimit",
+              "paramtyp": "real",
+              "required": false,
+              "defaultvalue": "10800"
+            },
+            {
+              "paramid": "bluelimit",
+              "paramtyp": "real",
+              "required": false,
+              "defaultvalue": "6300"
+            },
+            {
+              "paramid": "wrspath",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "wrsrow",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srcpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdrfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "tif"
+            },
+            {
+              "paramid": "datfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "dstpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdrfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "tif"
+            },
+            {
+              "paramid": "datfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "LandsatProc",
+        "subprocid": "MetaMaskLandsatSingleScene",
+        "version": "0.8.0",
+        "minuserstratum": "10",
+        "title": "Landsat Scene cloud, shadow and snow mask from meta data",
+        "label": "Landsat Scene cloud, shadow and snow mask from meta data"
+      },
+      "system": {
+        "procsys": {
+          "system": "landsat",
+          "srcsystem": "landsat",
+          "dstsystem": "landsat",
+          "srcdivision": "scenes",
+          "dstdivision": "scenes",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      },
+      "node": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": [
+            {
+              "paramid": "source",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "product",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "collcat",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "collnr",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "0",
+              "setvalue": {
+                "value": "0",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "proccat",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "DN",
+              "setvalue": [
+                {
+                  "value": "DN",
+                  "label": "DN"
+                },
+                {
+                  "value": "TOA",
+                  "label": "TOA"
+                },
+                {
+                  "value": "SRFI",
+                  "label": "SRFI"
+                }
+              ]
+            },
+            {
+              "paramid": "suffix",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "confidence",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "medium"
+            },
+            {
+              "paramid": "cellnull",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "255"
+            },
+            {
+              "paramid": "celltype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "BYTE"
+            },
+            {
+              "paramid": "dataunit",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "mask"
+            },
+            {
+              "paramid": "scalefac",
+              "paramtyp": "real",
+              "required": false,
+              "defaultvalue": "1"
+            },
+            {
+              "paramid": "offsetadd",
+              "paramtyp": "real",
+              "required": false,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "measure",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "N"
+            },
+            {
+              "paramid": "wrspath",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "wrsrow",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srcpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdrfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "tif"
+            },
+            {
+              "paramid": "datfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "dstpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdrfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "tif"
+            },
+            {
+              "paramid": "datfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "LandsatProc",
+        "subprocid": "EmissivityKelvinSingleScene",
+        "version": "0.8.0",
+        "minuserstratum": "10",
+        "title": "Download Landsat scene from USGS",
+        "label": "ownload Landsat scene from USGS"
+      },
+      "system": {
+        "procsys": {
+          "system": "landsat",
+          "srcsystem": "landsat",
+          "dstsystem": "landsat",
+          "srcdivision": "scenes",
+          "dstdivision": "scenes",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      },
+      "node": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": [
+            {
+              "paramid": "method",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "emisgainbias",
+              "setvalue": [
+                {
+                  "value": "lut",
+                  "label": "Look up table"
+                },
+                {
+                  "value": "emisgainbias",
+                  "label": "emissivity gain and bias"
+                },
+                {
+                  "value": "radqcal",
+                  "label": "using radiance and quantization level"
+                }
+              ]
+            },
+            {
+              "paramid": "source",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "product",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "collcat",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "collnr",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "0",
+              "setvalue": {
+                "value": "0",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "proccat",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "DN",
+              "setvalue": [
+                {
+                  "value": "DN",
+                  "label": "DN"
+                },
+                {
+                  "value": "TOA",
+                  "label": "TOA"
+                },
+                {
+                  "value": "EMISFI",
+                  "label": "EMISFI"
+                }
+              ]
+            },
+            {
+              "paramid": "factor",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "10"
+            },
+            {
+              "paramid": "cellnull",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "-32768"
+            },
+            {
+              "paramid": "celltype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "INT16"
+            },
+            {
+              "paramid": "dataunit",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "emissivity"
+            },
+            {
+              "paramid": "scalefac",
+              "paramtyp": "real",
+              "required": false,
+              "defaultvalue": "0.1"
+            },
+            {
+              "paramid": "offsetadd",
+              "paramtyp": "real",
+              "required": false,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "measure",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "R"
+            },
+            {
+              "paramid": "suffix",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "eemeta"
+            },
+            {
+              "paramid": "wrspath",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "wrsrow",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srcpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdrfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "tif"
+            },
+            {
+              "paramid": "datfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "dstpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdrfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "tif"
+            },
+            {
+              "paramid": "datfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "LandsatProc",
+        "subprocid": "dbupdateLandsatSingleScene",
+        "version": "0.8.0",
+        "minuserstratum": "10",
+        "title": "Loop over all db recorded Landsat scenes",
+        "label": "Loop over all db recorded Landsat scenes"
+      },
+      "system": {
+        "procsys": {
+          "system": "landsat",
+          "srcsystem": "landsat",
+          "dstsystem": "landsat",
+          "srcdivision": "scenes",
+          "dstdivision": "scenes",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      },
+      "node": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": [
+            {
+              "paramid": "source",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "product",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "collcat",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "setvalue": {
+                "value": "",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "collnr",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "0",
+              "setvalue": {
+                "value": "0",
+                "label": "any"
+              }
+            },
+            {
+              "paramid": "reflsuffix",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "toasuffix",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "srfisuffix",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "emissuffix",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "decloudsuffix",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "tercorsuffix",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "proccat",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "",
+              "setvalue": [
+                {
+                  "value": "DN",
+                  "label": "DN"
+                },
+                {
+                  "value": "TOA",
+                  "label": "TOA"
+                },
+                {
+                  "value": "SRFI",
+                  "label": "SRFI"
+                }
+              ]
+            },
+            {
+              "paramid": "wrspath",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "wrsrow",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srcpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdrfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "datfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "dstpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdrfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "datfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "processid": "addsubproc",
+      "overwrite": "N",
+      "delete": "Y",
+      "parameters": {
+        "rootprocid": "LandsatProc",
+        "subprocid": "explodelandsatscene",
+        "version": "0.8.0",
+        "minuserstratum": "7",
+        "title": "Extracts the content of landsat scenes>",
+        "label": "Scenes must be organized prior to extration"
+      },
+      "system": {
+        "procsys": {
+          "system": "landsat",
+          "srcsystem": "landsat",
+          "dstsystem": "export",
+          "srcdivision": "scenes",
+          "dstdivision": "scenes",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      },
+      "node": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": {
+            "element": "parameters",
+            "paramid": "wrs",
+            "paramtyp": "int",
+            "required": true,
+            "defaultvalue": "",
+            "setvalue": [
+              {
+                "value": "1",
+                "label": "WRS 1"
+              },
+              {
+                "value": "2",
+                "label": "WRS 2"
+              }
+            ]
+          }
+        },
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": {
+            "element": "parameters",
+            "paramid": "replaceold",
+            "paramtyp": "bool",
+            "required": false,
+            "defaultvalue": "True"
+          }
+        },
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": [
+            {
+              "element": "parameters",
+              "paramid": "redundant",
+              "paramtyp": "bool",
+              "required": false,
+              "defaultvalue": "False"
+            },
+            {
+              "element": "parameters",
+              "paramid": "exploded",
+              "paramtyp": "bool",
+              "required": false,
+              "defaultvalue": "True"
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": {
+            "paramid": "sensat",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": "",
+            "setvalue": [
+              {
+                "value": "LC8",
+                "label": "Landsat 8 OLI/TIRS"
+              },
+              {
+                "value": "LE7",
+                "label": "Landsat 7 ETM+)"
+              },
+              {
+                "value": "LT4",
+                "label": "Landsat 4 TM"
+              },
+              {
+                "value": "LT5",
+                "label": "Landsat 5 TM"
+              },
+              {
+                "value": "LM1",
+                "label": "Landsat 1 MSS"
+              },
+              {
+                "value": "LM2",
+                "label": "Landsat 2 MSS"
+              },
+              {
+                "value": "LM3",
+                "label": "Landsat 3 MSS"
+              },
+              {
+                "value": "LM4",
+                "label": "Landsat 4 MSS"
+              },
+              {
+                "value": "LM5",
+                "label": "Landsat 5 MSS"
+              }
+            ]
+          }
+        },
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": {
+            "element": "parameters",
+            "paramid": "dataunit",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": "srfi",
+            "setvalue": [
+              {
+                "value": "reflectance",
+                "label": "surfance reflectance factor index"
+              },
+              {
+                "value": "dn",
+                "label": "digital number"
+              }
+            ]
+          }
+        },
+        {
+          "parent": "process",
+          "element": "srcpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdrfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "tif"
+            },
+            {
+              "paramid": "datfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "dstpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdrfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "tif"
+            },
+            {
+              "paramid": "datfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srccomp",
+          "parameter": [
+            {
+              "paramid": "source",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "product",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "folder",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "original"
+            },
+            {
+              "paramid": "band",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "prefix",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "suffix",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "masked",
+              "paramtyp": "bool",
+              "required": false,
+              "defaultvalue": "N"
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srccomp",
+          "parameter": [
+            {
+              "paramid": "source",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "product",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "folder",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "band",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "prefix",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "suffix",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "masked",
+              "paramtyp": "bool",
+              "required": false,
+              "defaultvalue": "N"
+            },
+            {
+              "paramid": "cellnull",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "-9999"
+            },
+            {
+              "paramid": "celltype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "scalefac",
+              "paramtyp": "real",
+              "required": false,
+              "defaultvalue": "1"
+            },
+            {
+              "paramid": "offsetadd",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "dataunit",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "LandsatProc",
+        "subprocid": "metafileparams",
+        "version": "0.8.0",
+        "minuserstratum": "7",
+        "title": "Defines landsat metadatafile>",
+        "label": "Defines the type and content of landsat metadata files and relates them to the db"
+      },
+      "system": {
+        "procsys": {
+          "system": "landsat",
+          "srcsystem": "landsat",
+          "dstsystem": "export",
+          "srcdivision": "scenes",
+          "dstdivision": "scenes",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      },
+      "node": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": [
+            {
+              "element": "parameters",
+              "paramid": "archive",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "USGScollL1v2016",
+              "setvalue": {
+                "value": "USGScollL1v2016",
+                "label": "USGS Landsat collection L1 version 2016"
+              }
+            },
+            {
+              "element": "parameters",
+              "paramid": "metatypeid",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "metatype",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "",
+              "setvalue": [
+                {
+                  "value": "xml",
+                  "label": "xml file"
+                },
+                {
+                  "value": "oneline",
+                  "label": "Single line meta file"
+                },
+                {
+                  "value": "table",
+                  "label": "tabled metafile"
+                },
+                {
+                  "value": "MTL",
+                  "label": "MTL type metadata"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "parameter",
+          "parameter": {
+            "element": "parameters",
+            "paramid": "element",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          }
+        },
+        {
+          "parent": "process",
+          "element": "node",
+          "parameter": [
+            {
+              "element": "parameter",
+              "paramid": "parentid",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "element": "parameter",
+              "paramid": "element",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "element": "parameter",
+              "paramid": "paramid",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "element": "parameter",
+              "paramid": "paramtyp",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "element": "parameter",
+              "paramid": "tagorattr",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "element": "parameter",
+              "paramid": "required",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "element": "parameter",
+              "paramid": "prestring",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            },
+            {
+              "element": "parameter",
+              "paramid": "poststring",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            },
+            {
+              "element": "parameter",
+              "paramid": "separator",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            },
+            {
+              "element": "parameter",
+              "paramid": "itemnr",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            },
+            {
+              "element": "parameter",
+              "paramid": "substitute",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "LandsatProc",
+        "subprocid": "checklandsat",
+        "version": "0.8.0",
+        "minuserstratum": "7",
+        "title": "Check landsat consistency>",
+        "label": "Compares the database and files of the karttur landsat archive"
+      },
+      "system": {
+        "procsys": {
+          "system": "landsat",
+          "srcsystem": "landsat",
+          "dstsystem": "export",
+          "srcdivision": "scenes",
+          "dstdivision": "scenes",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      },
+      "node": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": {
+            "paramid": "sensat",
+            "paramtyp": "text",
+            "required": false,
+            "defaultvalue": "*",
+            "setvalue": [
+              {
+                "value": "LC8",
+                "label": "Landsat 8 OLI/TIRS"
+              },
+              {
+                "value": "LE7",
+                "label": "Landsat 7 ETM+)"
+              },
+              {
+                "value": "LT4",
+                "label": "Landsat 4 TM"
+              },
+              {
+                "value": "LT5",
+                "label": "Landsat 5 TM"
+              },
+              {
+                "value": "LM1",
+                "label": "Landsat 1 MSS"
+              },
+              {
+                "value": "LM2",
+                "label": "Landsat 2 MSS"
+              },
+              {
+                "value": "LM3",
+                "label": "Landsat 3 MSS"
+              },
+              {
+                "value": "LM4",
+                "label": "Landsat 4 MSS"
+              },
+              {
+                "value": "LM5",
+                "label": "Landsat 5 MSS"
+              },
+              {
+                "value": "***",
+                "label": "Check all landsat scenes"
+              }
+            ]
+          }
+        },
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": [
+            {
+              "element": "parameters",
+              "paramid": "dataunit",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "srfi",
+              "setvalue": [
+                {
+                  "value": "reflectance",
+                  "label": "surfance reflectance factor index"
+                },
+                {
+                  "value": "dn",
+                  "label": "digital number"
+                }
+              ]
+            },
+            {
+              "element": "parameters",
+              "paramid": "organized",
+              "paramtyp": "bool",
+              "required": false,
+              "defaultvalue": "N"
+            },
+            {
+              "element": "parameters",
+              "paramid": "redundant",
+              "paramtyp": "bool",
+              "required": false,
+              "defaultvalue": "N"
+            },
+            {
+              "element": "parameters",
+              "paramid": "download",
+              "paramtyp": "bool",
+              "required": false,
+              "defaultvalue": "N"
+            },
+            {
+              "element": "parameters",
+              "paramid": "extract",
+              "paramtyp": "bool",
+              "required": false,
+              "defaultvalue": "N"
+            },
+            {
+              "element": "parameters",
+              "paramid": "meta",
+              "paramtyp": "bool",
+              "required": false,
+              "defaultvalue": "N"
+            },
+            {
+              "element": "parameters",
+              "paramid": "mask",
+              "paramtyp": "bool",
+              "required": false,
+              "defaultvalue": "N"
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srcperiod",
+          "parameter": [
+            {
+              "paramid": "startyear",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "1900"
+            },
+            {
+              "paramid": "endyear",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "2100"
+            },
+            {
+              "paramid": "startmonth",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "01"
+            },
+            {
+              "paramid": "endmonth",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "12"
+            },
+            {
+              "paramid": "startday",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "01"
+            },
+            {
+              "paramid": "endday",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "31"
+            },
+            {
+              "paramid": "addons",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "maxdaysaddons",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "seasonstartmonth",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "seasonendmonth",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "seasonstartday",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "seasonendday",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "timestep",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "allscenes"
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srcpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdrfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "xml"
+            },
+            {
+              "paramid": "datfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "dstpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdrfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "xml"
+            },
+            {
+              "paramid": "datfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srccomp",
+          "parameter": [
+            {
+              "paramid": "source",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "product",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "folder",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "orignal"
+            },
+            {
+              "paramid": "band",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "prefix",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "suffix",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "masked",
+              "paramtyp": "bool",
+              "required": false,
+              "defaultvalue": "N"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "LandsatProc",
+        "subprocid": "landsatscenetemplate",
+        "version": "0.8.0",
+        "minuserstratum": "10",
+        "title": "Templates for identifying landsat scene types"
+      },
+      "system": {
+        "procsys": {
+          "system": "landsat",
+          "srcsystem": "landsat",
+          "dstsystem": "landsat",
+          "srcdivision": "NA",
+          "dstdivision": "NA",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      },
+      "node": {
+        "parent": "process",
+        "element": "parameters",
+        "parameter": [
+          {
+            "paramid": "source",
+            "paramtyp": "text",
+            "required": false,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "product",
+            "paramtyp": "text",
+            "required": false,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "subtype",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": "A"
+          },
+          {
+            "paramid": "collcat",
+            "paramtyp": "text",
+            "required": false,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "collnr",
+            "paramtyp": "integer",
+            "required": false,
+            "defaultvalue": "0"
+          },
+          {
+            "paramid": "proccat",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": "",
+            "setvalue": [
+              {
+                "value": "srfi",
+                "label": "reflectance"
+              },
+              {
+                "value": "dn",
+                "label": "digital number"
+              },
+              {
+                "value": "toa",
+                "label": "digital number"
+              }
+            ]
+          },
+          {
+            "paramid": "scenenameform",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "basenameform",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "scenecompstr",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "basecompstr",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "element": "parameters",
+            "paramid": "archive",
+            "paramtyp": "Attr",
+            "tagorattr": "Tag",
+            "required": false,
+            "defaultvalue": "USGS",
+            "setvalue": {
+              "value": "USGScollL1v2016",
+              "label": "USGS Landsat collection L1 version 2016"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "LandsatProc",
+        "subprocid": "landsatbandtemplate",
+        "version": "0.8.0",
+        "minuserstratum": "10",
+        "title": "Templates for identifying landsat band types"
+      },
+      "system": {
+        "procsys": {
+          "system": "landsat",
+          "srcsystem": "landsat",
+          "dstsystem": "landsat",
+          "srcdivision": "NA",
+          "dstdivision": "NA",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      },
+      "node": {
+        "parent": "process",
+        "element": "parameters",
+        "parameter": [
+          {
+            "paramid": "source",
+            "paramtyp": "text",
+            "required": false,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "product",
+            "paramtyp": "text",
+            "required": false,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "subtype",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": "A"
+          },
+          {
+            "paramid": "collcat",
+            "paramtyp": "text",
+            "required": false,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "collnr",
+            "paramtyp": "integer",
+            "required": false,
+            "defaultvalue": "0"
+          },
+          {
+            "paramid": "filecat",
+            "paramtyp": "text",
+            "required": false,
+            "defaultvalue": "B"
+          },
+          {
+            "paramid": "proccat",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "bandnr",
+            "paramtyp": "integer",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "bandcat",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "scalefac",
+            "paramtyp": "real",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "offsetadd",
+            "paramtyp": "real",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "band",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "prefix",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "suffix",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "pattern",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "hdfgrid",
+            "paramtyp": "text",
+            "required": false,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "required",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "celltype",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": "Byte",
+            "setvalue": [
+              {
+                "value": "Byte",
+                "label": "Byte"
+              },
+              {
+                "value": "Int16",
+                "label": "Int16"
+              }
+            ]
+          },
+          {
+            "paramid": "cellnull",
+            "paramtyp": "integer",
+            "required": true,
+            "defaultvalue": "0"
+          },
+          {
+            "paramid": "dataunit",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": "",
+            "setvalue": [
+              {
+                "value": "SRFI",
+                "label": "reflectance"
+              },
+              {
+                "value": "DN",
+                "label": "digital number"
+              }
+            ]
+          },
+          {
+            "paramid": "measure",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": "",
+            "setvalue": [
+              {
+                "value": "N",
+                "label": "nominal"
+              },
+              {
+                "value": "O",
+                "label": "ordinal"
+              },
+              {
+                "value": "I",
+                "label": "interval"
+              },
+              {
+                "value": "R",
+                "label": "ratio"
+              }
+            ]
+          },
+          {
+            "paramid": "folder",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "fileext",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          }
+        ]
+      }
+    },
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "LandsatProc",
+        "subprocid": "landsatsupporttemplate",
+        "version": "0.8.0",
+        "minuserstratum": "10",
+        "title": "Templates for identifying landsat support layers"
+      },
+      "system": {
+        "procsys": {
+          "system": "landsat",
+          "srcsystem": "landsat",
+          "dstsystem": "export",
+          "srcdivision": "NA",
+          "dstdivision": "NA",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      },
+      "node": {
+        "parent": "process",
+        "element": "parameters",
+        "parameter": [
+          {
+            "paramid": "source",
+            "paramtyp": "text",
+            "required": false,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "product",
+            "paramtyp": "text",
+            "required": false,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "subtype",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": "A"
+          },
+          {
+            "paramid": "collcat",
+            "paramtyp": "text",
+            "required": false,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "collnr",
+            "paramtyp": "integer",
+            "required": false,
+            "defaultvalue": "0"
+          },
+          {
+            "paramid": "filecat",
+            "paramtyp": "text",
+            "required": false,
+            "defaultvalue": "S"
+          },
+          {
+            "paramid": "proccat",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "scalefac",
+            "paramtyp": "real",
+            "required": false,
+            "defaultvalue": "1"
+          },
+          {
+            "paramid": "offsetadd",
+            "paramtyp": "real",
+            "required": false,
+            "defaultvalue": "0"
+          },
+          {
+            "paramid": "band",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "prefix",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "suffix",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "pattern",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "hdfgrid",
+            "paramtyp": "text",
+            "required": false,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "required",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "celltype",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": "Byte",
+            "setvalue": [
+              {
+                "value": "Byte",
+                "label": "Byte"
+              },
+              {
+                "value": "Int16",
+                "label": "Int16"
+              }
+            ]
+          },
+          {
+            "paramid": "cellnull",
+            "paramtyp": "integer",
+            "required": true,
+            "defaultvalue": "0"
+          },
+          {
+            "paramid": "dataunit",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": "",
+            "setvalue": [
+              {
+                "value": "SRFI",
+                "label": "reflectance"
+              },
+              {
+                "value": "DN",
+                "label": "digital number"
+              }
+            ]
+          },
+          {
+            "paramid": "measure",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": "",
+            "setvalue": [
+              {
+                "value": "N",
+                "label": "nominal"
+              },
+              {
+                "value": "O",
+                "label": "ordinal"
+              },
+              {
+                "value": "I",
+                "label": "interval"
+              },
+              {
+                "value": "R",
+                "label": "ratio"
+              }
+            ]
+          },
+          {
+            "paramid": "folder",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "fileext",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          }
+        ]
+      }
+    },
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "LandsatProc",
+        "subprocid": "landsatmetatemplate",
+        "version": "0.8.0",
+        "minuserstratum": "10",
+        "title": "Templates for identifying landsat meta data"
+      },
+      "system": {
+        "procsys": {
+          "system": "landsat",
+          "srcsystem": "landsat",
+          "dstsystem": "export",
+          "srcdivision": "NA",
+          "dstdivision": "NA",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      },
+      "node": {
+        "parent": "process",
+        "element": "parameters",
+        "parameter": [
+          {
+            "paramid": "source",
+            "paramtyp": "text",
+            "required": false,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "product",
+            "paramtyp": "text",
+            "required": false,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "subtype",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": "A"
+          },
+          {
+            "paramid": "collcat",
+            "paramtyp": "text",
+            "required": false,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "filecat",
+            "paramtyp": "text",
+            "required": false,
+            "defaultvalue": "M"
+          },
+          {
+            "paramid": "proccat",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "collnr",
+            "paramtyp": "integer",
+            "required": false,
+            "defaultvalue": "0"
+          },
+          {
+            "paramid": "scalefac",
+            "paramtyp": "real",
+            "required": false,
+            "defaultvalue": "1"
+          },
+          {
+            "paramid": "offsetadd",
+            "paramtyp": "real",
+            "required": false,
+            "defaultvalue": "0"
+          },
+          {
+            "paramid": "band",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "prefix",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "suffix",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "pattern",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "folder",
+            "paramtyp": "text",
+            "required": false,
+            "defaultvalue": "metadata"
+          },
+          {
+            "paramid": "fileext",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "required",
+            "paramtyp": "text",
+            "required": true,
+            "defaultvalue": ""
+          },
+          {
+            "paramid": "dataunit",
+            "paramtyp": "text",
+            "required": false,
+            "defaultvalue": "NA"
+          },
+          {
+            "paramid": "measure",
+            "paramtyp": "text",
+            "required": false,
+            "defaultvalue": "N"
+          },
+          {
+            "paramid": "celltype",
+            "paramtyp": "text",
+            "required": false,
+            "defaultvalue": "text",
+            "parameter": {
+              "paramid": "cellnull",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "0"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

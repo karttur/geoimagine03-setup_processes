@@ -1,0 +1,398 @@
+
+
+
+    ,
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "TimeSeries",
+        "subprocid": "timeseriesgraph",
+        "version": "0.8.0",
+        "minuserstratum": "1",
+        "title": "Create time series graph"
+      },
+      "node": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "required": true,
+          "parameter": [
+            {
+              "paramid": "version",
+              "paramtyp": "text",
+
+              "required": false,
+              "defaultvalue": "1.3"
+            },
+            {
+              "paramid": "x",
+              "paramtyp": "real",
+
+              "required": false,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "y",
+              "paramtyp": "real",
+
+              "required": false,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "input",
+              "paramtyp": "text",
+
+              "required": false,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "force",
+              "paramtyp": "text",
+
+              "required": false,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "trend",
+              "paramtyp": "text",
+
+              "required": false,
+              "defaultvalue": "spline"
+            },
+            {
+              "paramid": "kernel",
+              "paramtyp": "text",
+
+              "required": false,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "forceseason",
+              "paramtyp": "boolean",
+
+              "required": false,
+              "defaultvalue": "False"
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srcpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdr",
+              "paramtyp": "text",
+
+              "required": true,
+              "defaultvalue": "tif"
+            },
+            {
+              "paramid": "dat",
+              "paramtyp": "text",
+
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srccomp",
+          "parameter": [
+            {
+              "paramid": "source",
+              "paramtyp": "text",
+
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "product",
+              "paramtyp": "text",
+
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "content",
+              "paramtyp": "text",
+
+              "required": false,
+              "defaultvalue": "auto"
+            },
+            {
+              "paramid": "layerid",
+              "paramtyp": "text",
+
+              "required": true,
+              "defaultvalue": "src"
+            },
+            {
+              "paramid": "prefix",
+              "paramtyp": "text",
+
+              "required": false,
+              "defaultvalue": "auto"
+            },
+            {
+              "paramid": "suffix",
+              "paramtyp": "text",
+
+              "required": false,
+              "defaultvalue": "auto"
+            },
+            {
+              "paramid": "masked",
+              "paramtyp": "bool",
+
+              "required": false,
+              "defaultvalue": "N"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "TimeSeries",
+        "subprocid": "seasonaltrendcorrgraph",
+        "version": "0.8.0",
+        "minuserstratum": "1",
+        "title": "Create time series graph"
+      },
+      "node": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "required": true,
+          "parameter": [
+            {
+              "paramid": "version",
+              "paramtyp": "text",
+
+              "required": false,
+              "defaultvalue": "1.3"
+            },
+            {
+              "paramid": "x",
+              "paramtyp": "real",
+
+              "required": false,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "y",
+              "paramtyp": "real",
+
+              "required": false,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "trend",
+              "paramtyp": "text",
+
+              "required": false,
+              "defaultvalue": "spline"
+            },
+            {
+              "paramid": "kernel",
+              "paramtyp": "text",
+
+              "required": false,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "forceseason",
+              "paramtyp": "boolean",
+
+              "required": false,
+              "defaultvalue": "False"
+            },
+            {
+              "paramid": "decompose",
+              "paramtyp": "text",
+
+              "required": false,
+              "defaultvalue": "trend"
+            },
+            {
+              "paramid": "splineseason",
+              "paramtyp": "bool",
+
+              "required": false,
+              "defaultvalue": "False"
+            },
+            {
+              "paramid": "periodfactor",
+              "paramtyp": "integer",
+
+              "required": false,
+              "defaultvalue": "5"
+            },
+            {
+              "paramid": "invert",
+              "paramtyp": "boolean",
+
+              "required": false,
+              "defaultvalue": "False"
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srcpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdr",
+              "paramtyp": "text",
+
+              "required": true,
+              "defaultvalue": "tif"
+            },
+            {
+              "paramid": "dat",
+              "paramtyp": "text",
+
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srccomp",
+          "parameter": [
+            {
+              "paramid": "source",
+              "paramtyp": "text",
+
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "product",
+              "paramtyp": "text",
+
+              "required": false,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "content",
+              "paramtyp": "text",
+
+              "required": false,
+              "defaultvalue": "auto"
+            },
+            {
+              "paramid": "layerid",
+              "paramtyp": "text",
+
+              "required": true,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "prefix",
+              "paramtyp": "text",
+
+              "required": false,
+              "defaultvalue": "auto"
+            },
+            {
+              "paramid": "suffix",
+              "paramtyp": "text",
+
+              "required": false,
+              "defaultvalue": "auto"
+            },
+            {
+              "paramid": "masked",
+              "paramtyp": "bool",
+
+              "required": false,
+              "defaultvalue": "N"
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "index",
+          "parameter": {
+            "paramid": "layerid",
+            "paramtyp": "text",
+
+            "required": true,
+            "defaultvalue": ""
+          }
+        }
+      ]
+    },
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "TimeSeries",
+        "subprocid": "tsindexgraph",
+        "version": "0.8.0",
+        "minuserstratum": "1",
+        "title": "Create time series graph"
+      },
+      "node": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": [
+            {
+              "paramid": "trend",
+              "paramtyp": "text",
+
+              "required": true,
+              "defaultvalue": "spline"
+            },
+            {
+              "paramid": "kernel",
+              "paramtyp": "text",
+
+              "required": false,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "forceseason",
+              "paramtyp": "boolean",
+
+              "required": false,
+              "defaultvalue": "False"
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "index",
+          "parameter": {
+            "paramid": "layerid",
+            "paramtyp": "text",
+
+            "required": true,
+            "defaultvalue": ""
+          }
+        }
+      ]
+    }
+  ]
+}

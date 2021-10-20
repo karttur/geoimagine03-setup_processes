@@ -1,0 +1,235 @@
+{
+  "postgresdb": {
+    "db": "geoimagine"
+  },
+  "userproject": {
+    "userid": "karttur",
+    "projectid": "karttur",
+    "tractid": "karttur",
+    "siteid": "*",
+    "plotid": "*",
+    "system": "system"
+  },
+  "process": [
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "TimeSeries",
+        "subprocid": "TimeSeriesTrends",
+        "version": "0.9.0",
+        "minuserstratum": 1,
+        "title": "Time-series trends"
+      },
+      "system": [
+        {
+          "system": "ancillary",
+          "srcsystem": "ancillary",
+          "dstsystem": "ancillary",
+          "srcdivision": "region",
+          "dstdivision": "region",
+          "srcepsg": 0,
+          "dstepsg": 0
+        },
+        {
+          "system": "modis",
+          "srcsystem": "modis",
+          "dstsystem": "modis",
+          "srcdivision": "region",
+          "dstdivision": "region",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      ],
+      "nodes": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "required": true,
+          "parameter": [
+            {
+              "paramid": "copycomp",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "trendts"
+            },
+            {
+              "paramid": "version",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "1.3"
+            },
+            {
+              "paramid": "trend",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "spline"
+            },
+            {
+              "paramid": "periodfactor",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": "4"
+            },
+            {
+              "paramid": "decompose",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "trend"
+            },
+            {
+              "paramid": "splineseason",
+              "paramtyp": "bool",
+              "required": true,
+              "defaultvalue": "False"
+            },
+            {
+              "paramid": "kernel",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "forceseason",
+              "paramtyp": "boolean",
+              "required": true,
+              "defaultvalue": "False"
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srcpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdr",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "tif"
+            },
+            {
+              "paramid": "dat",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "dstpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdr",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "tif"
+            },
+            {
+              "paramid": "dat",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srccomp",
+          "parameter": [
+            {
+              "paramid": "*",
+              "paramtyp": "element",
+              "required": true,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "parent",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "process"
+            },
+            {
+              "paramid": "element",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "*"
+            }
+          ]
+        },
+        {
+          "parent": "srccomp",
+          "element": "*",
+          "parameter": [
+            {
+              "paramid": "source",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "product",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "content",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "layerid",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "*"
+            },
+            {
+              "paramid": "prefix",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "suffix",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "stats",
+          "parameter": [
+            {
+              "paramid": "id",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "layerid",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

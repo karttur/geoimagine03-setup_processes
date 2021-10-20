@@ -1,0 +1,185 @@
+{
+  "postgresdb": {
+    "db": "geoimagine"
+  },
+  "userproject": {
+    "userid": "karttur",
+    "projectid": "karttur",
+    "tractid": "karttur",
+    "siteid": "*",
+    "plotid": "*",
+    "system": "system"
+  },
+  "period": {
+    "timestep": "static"
+  },
+  "process": [
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "ManageRegion",
+        "subprocid": "LinkDefaultRegionTiles",
+        "version": "0.8.0",
+        "minuserstratum": 10,
+        "title": "Link Default Regions to system tiles",
+        "label": "Link Default Regions to system tiles"
+      },
+      "system": [
+        {
+          "system": "modis",
+          "srcsystem": "system",
+          "dstsystem": "modis",
+          "srcdivision": "region",
+          "dstdivision": "none",
+          "srcepsg": 0,
+          "dstepsg": 6842
+        },
+        {
+          "system": "ease2n",
+          "srcsystem": "system",
+          "dstsystem": "ease2n",
+          "srcdivision": "region",
+          "dstdivision": "none",
+          "srcepsg": 0,
+          "dstepsg": 6931
+        },
+        {
+          "system": "ease2s",
+          "srcsystem": "system",
+          "dstsystem": "ease2s",
+          "srcdivision": "region",
+          "dstdivision": "none",
+          "srcepsg": 0,
+          "dstepsg": 6932
+        },
+        {
+          "system": "ease2t",
+          "srcsystem": "system",
+          "dstsystem": "ease2t",
+          "srcdivision": "region",
+          "dstdivision": "none",
+          "srcepsg": 0,
+          "dstepsg": 6933
+        }
+      ],
+      "nodes": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": [
+            {
+              "paramid": "defregmask",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "land",
+              "hint": "Default region for restricting tile search"
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srcpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "",
+              "hint": "to be completed"
+            },
+            {
+              "paramid": "hdr",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "shp",
+              "hint": "to be completed"
+            },
+            {
+              "paramid": "dat",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "shp",
+              "hint": "to be completed"
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srccomp",
+          "parameter": [
+            {
+              "paramid": "*",
+              "paramtyp": "element",
+              "required": true,
+              "defaultvalue": "*",
+              "hint": "Hierarchical pointer"
+            },
+            {
+              "paramid": "parent",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "process",
+              "hint": "to be completed"
+            },
+            {
+              "paramid": "element",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*",
+              "hint": "to be completed"
+            }
+          ]
+        },
+        {
+          "parent": "srccomp",
+          "element": "*",
+          "parameter": [
+            {
+              "paramid": "source",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "karttur",
+              "hint": "Dataset source (e.g. sensor, method, model, etc (hyphen allowed, underscore not allowd)"
+            },
+            {
+              "paramid": "product",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "pubroi",
+              "hint": "Dataset type, product, producer etc  (hyphen allowed, underscore not allowd)"
+            },
+            {
+              "paramid": "content",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "roi",
+              "hint": "Dataset content (hyphen allowed, underscore not allowd)"
+            },
+            {
+              "paramid": "layerid",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "defreg",
+              "hint": "Dataset layer or band id"
+            },
+            {
+              "paramid": "prefix",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "defreg",
+              "hint": "to be completed"
+            },
+            {
+              "paramid": "suffix",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "v010",
+              "hint": "to be completed"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

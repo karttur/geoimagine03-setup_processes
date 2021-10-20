@@ -1,0 +1,644 @@
+{
+  "postgresdb": {
+    "db": "geoimagine"
+  },
+  "userproject": {
+    "userid": "karttur",
+    "projectid": "karttur",
+    "tractid": "karttur",
+    "siteid": "*",
+    "plotid": "*",
+    "system": "system"
+  },
+  "process": [
+    {
+      "processid": "addrootproc",
+      "parameters": {
+        "rootprocid": "Ancillary",
+        "title": "Ancillary data processing",
+        "label": "Processes for downloading and organizing ancillary data"
+      }
+    },
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "Ancillary",
+        "subprocid": "OrganizeAncillary",
+        "version": "0.8.0",
+        "minuserstratum": 10,
+        "title": "Organize ancillary data",
+        "label": "Organize local (downloaded or created) ancillary data"
+      },
+      "system": {
+        "procsys": {
+          "system": "ancillary",
+          "srcsystem": "NA",
+          "dstsystem": "ancillary",
+          "srcdivision": "NA",
+          "dstdivision": "region",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      },
+      "nodes": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": [
+            {
+              "paramid": "importcode",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "tif",
+              "hint": "'Import code that identifies whith subroutine to use for import'",
+              "setvalue": [
+                {
+                  "setvalue": "viewer",
+                  "label": "view user"
+                }
+              ]
+            },
+            {
+              "paramid": "epsg",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": 4326,
+              "hint": "'EPSG 4-integer code of projection for dataset to import'"
+            },
+            {
+              "paramid": "orgid",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "''",
+              "hint": "'Organisation id for dataset'"
+            },
+            {
+              "paramid": "dsname",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "''",
+              "hint": "'Name of dataset to import'"
+            },
+            {
+              "paramid": "dsversion",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "'0'",
+              "hint": "'Dataset version (if applicable)'"
+            },
+            {
+              "paramid": "accessdate",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "''",
+              "hint": "Date of accessing dataset (if left blank todays date will be recorded)"
+            },
+            {
+              "paramid": "regionid",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "''",
+              "hint": "'Default region id of the dataset'"
+            },
+            {
+              "paramid": "dataurl",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "''",
+              "hint": "url for source dataset"
+            },
+            {
+              "paramid": "metaurl",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "''",
+              "hint": "url for source metadata"
+            },
+            {
+              "paramid": "title",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "''",
+              "hint": "'Source dataset title'"
+            },
+            {
+              "paramid": "label",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "''",
+              "hint": "'Source dataset label'"
+            },
+            {
+              "paramid": "copyright",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "unknown",
+              "hint": "'Source dataset copyright'"
+            },
+            {
+              "paramid": "replacestr",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "''",
+              "hint": "'String to replace in multi-layered source datasets'"
+            },
+            {
+              "paramid": "replacetag",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "''",
+              "hint": "'Tag identifying replacement identifying'"
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srcpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "''",
+              "hint": "'Volume, disk or path containg the source data'"
+            },
+            {
+              "paramid": "hdr",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "''",
+              "hint": "'Header or header+data file extension'"
+            },
+            {
+              "paramid": "dat",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "''",
+              "hint": "'Data file extension for datasets with separate header + data file'"
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "dstpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "''",
+              "hint": "'Volume, disk or path for saving the destination data'"
+            },
+            {
+              "paramid": "hdr",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "''",
+              "hint": "'Header or header+data file extension'"
+            },
+            {
+              "paramid": "datfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "''",
+              "hint": "'Data file extension for datasets with separate header + data file'"
+            },
+            {
+              "paramid": "system",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "ancillary",
+              "hint": "'Source data system'",
+              "setvalue": [
+                {
+                  "setvalue": "ancillary",
+                  "label": "Import to ancillary system"
+                },
+                {
+                  "setvalue": "landsat",
+                  "label": "Import to landsat system"
+                },
+                {
+                  "setvalue": "mgrs",
+                  "label": "Import to mgrs system"
+                },
+                {
+                  "setvalue": "modis",
+                  "label": "Import to modis system"
+                },
+                {
+                  "setvalue": "ease2npole",
+                  "label": "Import to EASE 2 north polar system"
+                },
+                {
+                  "setvalue": "ease2spole",
+                  "label": "Import to EASE 2 south polar system"
+                },
+                {
+                  "setvalue": "ease2ntropic",
+                  "label": "Import to EASE 2 tropical system"
+                }
+              ]
+            },
+            {
+              "paramid": "division",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "region",
+              "hint": "'Source data division'",
+              "setvalue": [
+                {
+                  "setvalue": "tiles",
+                  "label": "Data files divided in tiles"
+                },
+                {
+                  "setvalue": "mosaic",
+                  "label": "Mosaicked data files"
+                },
+                {
+                  "setvalue": "region",
+                  "label": "Region data files"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srcraw",
+          "parameter": [
+            {
+              "paramid": "id",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "any",
+              "hint": "'Source data identifier'"
+            },
+            {
+              "paramid": "datadir",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "''",
+              "hint": "'Source data local directory (under volume)'"
+            },
+            {
+              "paramid": "datafile",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "''",
+              "hint": "'Source data file name'"
+            },
+            {
+              "paramid": "datalayer",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "''",
+              "hint": "'Source data layer name'"
+            },
+            {
+              "paramid": "measure",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "''",
+              "hint": "'Source data scale measure'",
+              "setvalue": [
+                {
+                  "setvalue": "N",
+                  "label": "nominal"
+                },
+                {
+                  "setvalue": "O",
+                  "label": "ordinal"
+                },
+                {
+                  "setvalue": "I",
+                  "label": "interval"
+                },
+                {
+                  "setvalue": "R",
+                  "label": "ratio"
+                }
+              ]
+            },
+            {
+              "paramid": "title",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "''",
+              "hint": "'Source dataset title'"
+            },
+            {
+              "paramid": "label",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "''",
+              "hint": "'Source dataset label'"
+            },
+            {
+              "paramid": "metapath",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "''",
+              "hint": "'Source dataset meta path'"
+            },
+            {
+              "paramid": "dataurl",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "''",
+              "hint": "'Source layer url (if blank the dataset url will be used)'"
+            },
+            {
+              "paramid": "metaurl",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "''",
+              "hint": "'Source layer meta data url (if blank the dataset url will be used)'"
+            },
+            {
+              "paramid": "cellnull",
+              "paramtyp": "real",
+              "required": false,
+              "defaultvalue": "2222.2",
+              "hint": "'Cell null for raster data'"
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "dstcomp",
+          "parameter": [
+            {
+              "paramid": "*",
+              "paramtyp": "element",
+              "required": true,
+              "defaultvalue": "''",
+              "hint": "'Pointer for hiearchical json structure'"
+            },
+            {
+              "paramid": "parent",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "process",
+              "hint": "'Pointer for hiearchical json structure'"
+            },
+            {
+              "paramid": "element",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*",
+              "hint": "'Pointer for hiearchical json structure - should correspond with {dstcomp:paramid}'"
+            }
+          ]
+        },
+        {
+          "parent": "dstcomp",
+          "element": "*",
+          "parameter": [
+            {
+              "paramid": "source",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "''",
+              "hint": "'Source instrument, method, model or similar of import layer'"
+            },
+            {
+              "paramid": "product",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "''",
+              "hint": "'Import layer product, producer or similary'"
+            },
+            {
+              "paramid": "content",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "''",
+              "hint": "'Import layer content or theme'"
+            },
+            {
+              "paramid": "layerid",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "*",
+              "hint": "'Import layer id'"
+            },
+            {
+              "paramid": "prefix",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "''",
+              "hint": "'Import layer prefix (usually identical to id)'"
+            },
+            {
+              "paramid": "suffix",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "''",
+              "hint": "'Import layer syffix (usually identical to id)'"
+            },
+            {
+              "paramid": "measure",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "N",
+              "setvalue": [
+                {
+                  "value": "N",
+                  "label": "nominal"
+                },
+                {
+                  "value": "O",
+                  "label": "ordinal"
+                },
+                {
+                  "value": "I",
+                  "label": "interval"
+                },
+                {
+                  "value": "R",
+                  "label": "ratio"
+                }
+              ]
+            },
+            {
+              "paramid": "masked",
+              "paramtyp": "bool",
+              "required": true,
+              "defaultvalue": "''"
+            },
+            {
+              "paramid": "cellnull",
+              "paramtyp": "integer",
+              "required": true,
+              "defaultvalue": "''"
+            },
+            {
+              "paramid": "celltype",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "''"
+            },
+            {
+              "paramid": "scalefac",
+              "paramtyp": "real",
+              "required": false,
+              "defaultvalue": "1"
+            },
+            {
+              "paramid": "offsetadd",
+              "paramtyp": "integer",
+              "required": false,
+              "defaultvalue": "0"
+            },
+            {
+              "paramid": "dataunit",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "''"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "processid": "addsubproc",
+      "parameters": {
+        "rootprocid": "Ancillary",
+        "subprocid": "anciltxttodb",
+        "version": "0.8.0",
+        "minuserstratum": "10",
+        "title": "Register ancillary text data in db",
+        "label": "Register locally organized ancillary text data in database"
+      },
+      "system": {
+        "procsys": {
+          "system": "ancillary",
+          "srcsystem": "ancillary",
+          "dstsystem": "ancillary",
+          "srcdivision": "region",
+          "dstdivision": "region",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      },
+      "node": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": [
+            {
+              "paramid": "schema",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "''"
+            },
+            {
+              "paramid": "table",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "''"
+            },
+            {
+              "paramid": "template",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "''"
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srcpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "''"
+            },
+            {
+              "paramid": "hdrfiletype",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "''"
+            },
+            {
+              "paramid": "datfiletype",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "''"
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srccomp",
+          "parameter": [
+            {
+              "paramid": "*",
+              "paramtyp": "element",
+              "required": true,
+              "defaultvalue": "''"
+            },
+            {
+              "paramid": "parent",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "process"
+            },
+            {
+              "paramid": "element",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "*"
+            }
+          ]
+        },
+        {
+          "parent": "srccomp",
+          "element": "*",
+          "parameter": [
+            {
+              "paramid": "source",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "''"
+            },
+            {
+              "paramid": "product",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "''"
+            },
+            {
+              "paramid": "folder",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "''"
+            },
+            {
+              "paramid": "band",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "txt"
+            },
+            {
+              "paramid": "prefix",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "''"
+            },
+            {
+              "paramid": "suffix",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "''"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

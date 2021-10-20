@@ -1,0 +1,96 @@
+{
+  "userproject": {
+    "userid": "karttur",
+    "projectid": "karttur",
+    "tractid": "karttur",
+    "siteid": "*",
+    "plotid": "*",
+    "system": "system"
+  },
+  "period": {
+    "timestep": "static"
+  },
+  "process": [
+    {
+      "processid": "DefaultRegionFromCoords",
+      "overwrite": false,
+      "parameters": {
+        "regioncat": "global",
+        "regionid": "arcticdem",
+        "regionname": "Arctic circumpolar DEM",
+        "parentid": "globe",
+        "parentcat": "globe",
+        "epsg": "4326",
+        "stratum": "1",
+        "minx": -180,
+        "miny": 58,
+        "maxx": 180,
+        "maxy": 90,
+        "version": "1.0",
+        "title": "Global arctic DEM",
+        "label": "Region covering 60 to 90 degrees north, coinciding with the core region of the Arctic DEM."
+      },
+      "dstpath": {
+        "volume": "geoinfo2021"
+      }
+    },
+    {
+      "processid": "DefaultRegionFromCoords",
+      "overwrite": false,
+      "parameters": {
+        "regioncat": "global",
+        "regionid": "arcticland",
+        "regionname": "Arctic circumpolar land",
+        "parentid": "globe",
+        "parentcat": "globe",
+        "stratum": "1",
+        "minx": -180,
+        "miny": 58,
+        "maxx": 180,
+        "maxy": 84,
+        "version": "1",
+        "title": "Global arctic land zone",
+        "label": "Region covering arctic cricumpolar land masses extending from 58 to 84 degrees north."
+      },
+      "dstpath": {
+        "volume": "geoinfo2021"
+      },
+      "dstcomp": [
+        {
+          "arcticland": {
+            "masked": "N",
+            "measure": "N",
+            "source": "karttur",
+            "product": "pubroi",
+            "content": "roi",
+            "layerid": "defreg",
+            "prefix": "defreg",
+            "suffix": "v010",
+            "dataunit": "boundary",
+            "celltype": "vector",
+            "cellnull": "0"
+          }
+        }
+      ]
+    },
+    {
+      "processid": "DefaultRegionFromCoords",
+      "overwrite": false,
+      "parameters": {
+        "regioncat": "global",
+        "regionid": "arcticdemext",
+        "regionname": "Arctic circumpolar DEM",
+        "parentid": "globe",
+        "parentcat": "globe",
+        "stratum": "1",
+        "minx": -180,
+        "miny": 50,
+        "maxx": 180,
+        "maxy": 90,
+        "version": "1",
+        "title": "Global arctic extended DEM",
+        "label": "Region covering 50 to 90 degrees north, coinciding with the extended region of the Arctic DEM."
+      }
+    }
+  ]
+}

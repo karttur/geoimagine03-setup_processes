@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<datapooldb>
+	<userproj userid = 'karttur' projectid = 'karttur' tractid= 'karttur' siteid = '*' plotid = '*' system = 'modis'></userproj>
+	<period startyear = '2000' endyear = '2020' timestep='8D'></period>
+
+	<process processid ='ModisSearchToDB' dsversion = '1.3'>
+		<parameters product="MCD43A4" version="006"></parameters>
+		<srcpath volume = "None"></srcpath>
+	</process>
+
+	<process processid ='ModisSearchToDB' dsversion = '1.3'>
+		<parameters product="MYD09A1" version="006"></parameters>
+		<srcpath volume = "None"></srcpath>
+	</process>
+
+	<process processid ='ModisSearchToDB' dsversion = '1.3'>
+		<parameters product="MOD09A1" version="006"></parameters>
+		<srcpath volume = "None"></srcpath>
+	</process>
+
+</datapooldb>

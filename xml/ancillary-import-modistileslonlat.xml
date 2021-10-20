@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<organize>
+	<userproj userid = 'karttur' projectid = 'karttur' tractid= 'karttur' siteid = '*' plotid = '*' system = 'ancillary'></userproj>
+	<period timestep='static'></period>
+	<process processid ='organizeancillary' dsversion = '3.0'>
+		<parameters importdef = 'shp'
+			epsg = '4326'
+			instid = 'karttur'
+			dsname  = 'modistiles'
+			dsversion = "1.0"
+			accessdate = "20180908"
+			copyright = ""
+			regionid = 'globe'
+			regioncat = 'globe'
+			dataurl = "" 
+			metaurl=""
+			title = "SIN modis tiles projected to lonlat"
+			label = "SIN modis tiles projected to lonlat"
+		> </parameters>
+		<srcpath volume = "None" hdrfiletype = "shp" datfiletype = "shp"></srcpath>
+		<dstpath volume = "Pegasus6" hdrfiletype = "shp" datfiletype = "shp"></dstpath>
+		<srcraw id="modtiles"
+			datadir ='data'
+			datafile = "modtiles_karttur_global_0"
+			theme = "tiling"
+			subtheme = "modis"
+			metadir =""
+			metadfile =""
+			title = "SIN modis tiles projected to lonlat"
+			label = "SIN modis tiles projected to lonlat"
+		></srcraw>
+		<dstcomp>
+			<modtiles source = "karttur" product = "modtiles" folder = "tiles" band = "modtiles" prefix = "modtiles" suffix = "lonlat" scalefac = "1" offsetadd = "0" dataunit = "na" celltype = 'vector' cellnull = '0' measure ='N' masked='N'>
+			</modtiles>
+		</dstcomp>
+	</process>
+</organize>

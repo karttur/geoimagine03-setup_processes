@@ -1,0 +1,12 @@
+###### MODIS #####
+
+#imports the shape file with the modis tile coords in lon lat format
+#NOTE YOU HAVE TO MAKE SURE THAT THE PATH GIVEN IS CORRECT
+json/ancillary-import-modistileslonlat_v090.json
+
+#modis-search_data-pool.xml updates the search for MODIS available tiles in the data pool
+#You must have login credentials set and linked
+#modis-search_data-pool.xml
+
+#modis-DataPool-search_todb.xml takes all html preloaded search results and adds them to the db
+#modis-DataPool-search_todb.xml

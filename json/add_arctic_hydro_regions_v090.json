@@ -1,0 +1,162 @@
+{
+  "userproject": {
+    "userid": "karttur",
+    "projectid": "karttur",
+    "tractid": "karttur",
+    "siteid": "*",
+    "plotid": "*",
+    "system": "ease2n"
+  },
+  "period": {
+    "timestep": "static"
+  },
+  "process": [
+    {
+      "processid": "DefaultRegionFromCoords",
+      "delete": true,
+      "parameters": {
+        "regioncat": "global",
+        "regionid": "nordichydroease2n",
+        "regionname": "Nordic hydro ease2n",
+        "parentid": "globe",
+        "parentcat": "globe",
+        "epsg": 6931,
+        "stratum": "1",
+        "minx": 238500,
+        "miny": -3501000,
+        "maxx": 1723500,
+        "maxy": -1845000,
+        "version": "1.0",
+        "title": "Nordic hydro ease2n",
+        "label": "Nordic hydrological region for ease2n."
+      },
+      "dstpath": {
+        "volume": "Ancillary"
+      },
+      "dstcomp": [
+        {
+          "nordichydro": {
+            "masked": "N",
+            "measure": "N",
+            "source": "karttur",
+            "product": "pubroi",
+            "content": "roi",
+            "layerid": "hydroreg",
+            "prefix": "hydroreg",
+            "suffix": "v010-ease2n",
+            "dataunit": "boundary",
+            "celltype": "vector",
+            "cellnull": "0"
+          }
+        }
+      ]
+    },
+    {
+      "processid": "DefaultRegionFromCoords",
+      "delete": true,
+      "parameters": {
+        "regioncat": "global",
+        "regionid": "greenlandhydroease2n",
+        "regionname": "Greenland hydro ease2n",
+        "parentid": "globe",
+        "parentcat": "globe",
+        "epsg": 6931,
+        "stratum": "1",
+        "minx": -3122000,
+        "miny": -2807000,
+        "maxx": -179000,
+        "maxy": -360080,
+        "version": "1.0",
+        "title": "Greenland hydro ease2n",
+        "label": "Greenland hydrological region for ease2n."
+      },
+      "dstpath": {
+        "volume": "Ancillary"
+      },
+      "dstcomp": [
+        {
+          "greenlandhydro": {
+            "masked": "N",
+            "measure": "N",
+            "source": "karttur",
+            "product": "pubroi",
+            "content": "roi",
+            "layerid": "hydroreg",
+            "prefix": "hydroreg",
+            "suffix": "v010-ease2n",
+            "dataunit": "boundary",
+            "celltype": "vector",
+            "cellnull": "0"
+          }
+        }
+      ]
+    },
+
+    {
+      "processid": "DefaultRegionFromCoords",
+      "delete": true,
+      "parameters": {
+        "regioncat": "global",
+        "regionid": "canadahydroease2n",
+        "regionname": "Canada Arctic hydro ease2n",
+        "parentid": "global",
+        "parentcat": "global",
+        "epsg": 6931,
+        "stratum": "1",
+        "minx": -3122000,
+        "miny": -505000,
+        "maxx": -188000,
+        "maxy": 1997000,
+        "version": "1.0",
+        "title": "Canada Arctic hydro ease2n",
+        "label": "Canada Arctic hydrological region for ease2n."
+      },
+      "dstpath": {
+        "volume": "Ancillary"
+      },
+      "dstcomp": [
+        {
+          "canadahydro": {
+            "masked": "N",
+            "measure": "N",
+            "source": "karttur",
+            "product": "pubroi",
+            "content": "roi",
+            "layerid": "hydroreg",
+            "prefix": "hydroreg",
+            "suffix": "v010-ease2n",
+            "dataunit": "boundary",
+            "celltype": "vector",
+            "cellnull": "0"
+          }
+        }
+      ]
+    },
+
+    {
+      "processid": "LinkDefaultRegionTiles",
+      "version": "0.9",
+      "verbose": 2,
+      "parameters": {
+        "defregmask": "northland"
+      },
+      "srcpath": {
+        "volume": "Ancillary",
+        "hdr": "shp",
+        "dat": "shp"
+      },
+      "srccomp": [
+        {
+          "regions": {
+            "source": "karttur",
+            "product": "pubroi",
+            "content": "roi",
+            "layerid": "hydroreg",
+            "prefix": "hydroreg",
+            "suffix": "v010-ease2n"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+##### SENTINEL SETUP #####
+
+#import NGA projections (UTM and MGRS)
+#Requires that the ancillary source file with the NGA regions is available on the local system
+ancillary-import-mgrs.xml
+
+#Requires that the ancillary source file with the Sentinel regions is available on the local system
+#import sentinel tile system
+ancillary-import-sentinel_tiles.xml
+
+#extract sentinal coordinates
+sentinel-extract_tile_coords.xml
+
+#extract mgrs coordinates (NGA original)
+mgrs-extract_tile_coords.xml
+
+#link default regions to sentinel tiles
+regions-sentineltiles_v80.xml

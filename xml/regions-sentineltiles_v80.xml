@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<regionssentinel>
+	<userproj userid = 'karttur' projectid = 'karttur' tractid= 'karttur' siteid = '*' plotid = '*' system = 'sentinel'></userproj>
+	<period timestep='static'></period>
+
+	<process processid ='LinkDefaultRegionsToSentinel' version = '3.0'>
+		<parameters></parameters>
+		<overwrite>N</overwrite>
+		<srcpath volume = "karttur" hdrfiletype = "shp" datfiletype = "shp"></srcpath>
+	    <srccomp>
+				<sentinel-tiles source = "ESA" product = "sentineltiles" folder = "mgrs" band = "sentinel-tiles" prefix = "sentinel-tiles" suffix = "global">
+				</sentinel-tiles>
+	    </srccomp>
+	</process>
+
+</regionssentinel>

@@ -1,0 +1,647 @@
+{
+  "manageprocess": {
+    "userproj": {
+      "userid": "karttur",
+      "projectid": "karttur",
+      "tractid": "karttur",
+      "siteid": "*",
+      "plotid": "*",
+      "system": "system"
+    },
+    "process": [
+      {
+        "processid": "addrootproc",
+        "parameters": {
+          "rootprocid": "Ancillary",
+          "title": "Ancillary data processing",
+          "label": "Processes for downloading and organizing ancillary data"
+        }
+      },
+      {
+        "processid": "addsubproc",
+        "overwrite": true
+        "parameters": {
+          "rootprocid": "Ancillary",
+          "subprocid": "organizeancillary",
+          "version": "0.8.0",
+          "minuserstratum": "10",
+          "title": "Organize ancillary data",
+          "label": "Organize local (downloaded or created) ancillary data"
+        },
+        "system": [
+          {
+            "system": "system",
+            "srcsystem": "NA",
+            "dstsystem": "system",
+            "srcdivision": "NA",
+            "dstdivision": "region",
+            "srcepsg": 0,
+            "dstepsg": 4326
+          },
+          {
+            "system": "ancillary",
+            "srcsystem": "NA",
+            "dstsystem": "ancillary",
+            "srcdivision": "NA",
+            "dstdivision": "region",
+            "srcepsg": 0,
+            "dstepsg": 0
+          }
+        ]
+        },
+        "node": [
+          {
+            "parent": "process",
+            "element": "parameters",
+            "parameter": [
+              {
+                "paramid": "importdef",
+                "paramtyp": "text",
+                "required": "Y",
+                "defaultvalue": "tif"
+              },
+              {
+                "paramid": "epsg",
+                "paramtyp": "int",
+                "required": "N",
+                "defaultvalue": "0"
+              },
+              {
+                "paramid": "instid",
+                "paramtyp": "text",
+                "required": "Y",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "dsname",
+                "paramtyp": "text",
+                "required": "Y",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "dsversion",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": "0"
+              },
+              {
+                "paramid": "accessdate",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "regionid",
+                "paramtyp": "text",
+                "required": "Y",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "dataurl",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "metaurl",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "metapath",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "title",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "label",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "copyright",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": "unknown"
+              },
+              {
+                "paramid": "replacestr",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "replacetag",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              }
+            ]
+          },
+          {
+            "parent": "process",
+            "element": "srcpath",
+            "parameter": [
+              {
+                "paramid": "volume",
+                "paramtyp": "text",
+                "required": "Y",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "hdrfiletype",
+                "paramtyp": "text",
+                "required": "Y",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "datfiletype",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              }
+            ]
+          },
+          {
+            "parent": "process",
+            "element": "dstpath",
+            "parameter": [
+              {
+                "paramid": "volume",
+                "paramtyp": "text",
+                "required": "Y",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "hdrfiletype",
+                "paramtyp": "text",
+                "required": "Y",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "datfiletype",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "system",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": "ANCILLARY"
+              },
+              {
+                "paramid": "division",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": "region"
+              }
+            ]
+          },
+          {
+            "parent": "process",
+            "element": "srcraw",
+            "parameter": [
+              {
+                "paramid": "id",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": "any"
+              },
+              {
+                "paramid": "datadir",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "datafile",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "datalayer",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "measure",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": "",
+                "setvalue": [
+                  {
+                    "value": "N",
+                    "label": "nominal"
+                  },
+                  {
+                    "value": "O",
+                    "label": "ordinal"
+                  },
+                  {
+                    "value": "I",
+                    "label": "interval"
+                  },
+                  {
+                    "value": "R",
+                    "label": "ratio"
+                  }
+                ]
+              },
+              {
+                "paramid": "dsversion",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "accessdate",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "product",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "theme",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "subtheme",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "copyright",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "title",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "label",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "metapath",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "dataurl",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "metaurl",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "cellnull",
+                "paramtyp": "real",
+                "required": "N",
+                "defaultvalue": "2222.2"
+              }
+            ]
+          },
+          {
+            "parent": "process",
+            "element": "dstcomp",
+            "parameter": [
+              {
+                "paramid": "*",
+                "paramtyp": "element",
+                "tagorattr": "E",
+                "required": "E",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "parent",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": "process"
+              },
+              {
+                "paramid": "element",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": "*"
+              }
+            ]
+          },
+          {
+            "parent": "dstcomp",
+            "element": "*",
+            "parameter": [
+              {
+                "paramid": "source",
+                "paramtyp": "text",
+                "required": "Y",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "product",
+                "paramtyp": "text",
+                "required": "Y",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "folder",
+                "paramtyp": "text",
+                "required": "Y",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "band",
+                "paramtyp": "text",
+                "required": "Y",
+                "defaultvalue": "*"
+              },
+              {
+                "paramid": "prefix",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "suffix",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "measure",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": "N",
+                "setvalue": [
+                  {
+                    "value": "N",
+                    "label": "nominal"
+                  },
+                  {
+                    "value": "O",
+                    "label": "ordinal"
+                  },
+                  {
+                    "value": "I",
+                    "label": "interval"
+                  },
+                  {
+                    "value": "R",
+                    "label": "ratio"
+                  }
+                ]
+              },
+              {
+                "paramid": "masked",
+                "paramtyp": "bool",
+                "required": "Y",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "cellnull",
+                "paramtyp": "integer",
+                "required": "Y",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "celltype",
+                "paramtyp": "text",
+                "required": "Y",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "scalefac",
+                "paramtyp": "real",
+                "required": "N",
+                "defaultvalue": "1"
+              },
+              {
+                "paramid": "offsetadd",
+                "paramtyp": "integer",
+                "required": "N",
+                "defaultvalue": "0"
+              },
+              {
+                "paramid": "dataunit",
+                "paramtyp": "text",
+                "required": "Y",
+                "defaultvalue": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "processid": "addsubproc",
+        "parameters": {
+          "rootprocid": "Ancillary",
+          "subprocid": "anciltxttodb",
+          "version": "0.8.0",
+          "minuserstratum": "10",
+          "title": "Register ancillary text data in db",
+          "label": "Register locally organized ancillary text data in database"
+        },
+        "system": {
+          "procsys": {
+            "system": "ancillary",
+            "srcsystem": "ancillary",
+            "dstsystem": "ancillary",
+            "srcdivision": "region",
+            "dstdivision": "region",
+            "srcepsg": 0,
+            "dstepsg": 0
+          }
+        },
+        "node": [
+          {
+            "parent": "process",
+            "element": "parameters",
+            "parameter": [
+              {
+                "paramid": "schema",
+                "paramtyp": "text",
+                "required": "Y",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "table",
+                "paramtyp": "text",
+                "required": "Y",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "template",
+                "paramtyp": "text",
+                "required": "Y",
+                "defaultvalue": ""
+              }
+            ]
+          },
+          {
+            "parent": "process",
+            "element": "srcpath",
+            "parameter": [
+              {
+                "paramid": "volume",
+                "paramtyp": "text",
+                "required": "Y",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "hdrfiletype",
+                "paramtyp": "text",
+                "required": "Y",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "datfiletype",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              }
+            ]
+          },
+          {
+            "parent": "process",
+            "element": "srccomp",
+            "parameter": [
+              {
+                "paramid": "*",
+                "paramtyp": "element",
+                "tagorattr": "E",
+                "required": "E",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "parent",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": "process"
+              },
+              {
+                "paramid": "element",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": "*"
+              }
+            ]
+          },
+          {
+            "parent": "srccomp",
+            "element": "*",
+            "parameter": [
+              {
+                "paramid": "source",
+                "paramtyp": "text",
+                "required": "Y",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "product",
+                "paramtyp": "text",
+                "required": "Y",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "folder",
+                "paramtyp": "text",
+                "required": "Y",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "band",
+                "paramtyp": "text",
+                "required": "Y",
+                "defaultvalue": "txt"
+              },
+              {
+                "paramid": "prefix",
+                "paramtyp": "text",
+                "required": "Y",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "suffix",
+                "paramtyp": "text",
+                "required": "Y",
+                "defaultvalue": ""
+              }
+            ]
+          },
+          {
+            "parent": "process",
+            "element": "link",
+            "parameter": [
+              {
+                "paramid": "csvcolumn",
+                "paramtyp": "int",
+                "required": "Y",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "csvnodata",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "csvaltcolumn",
+                "paramtyp": "int",
+                "required": "N",
+                "defaultvalue": "-99"
+              },
+              {
+                "paramid": "csvaltnodata",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "format",
+                "paramtyp": "text",
+                "required": "N",
+                "defaultvalue": ""
+              },
+              {
+                "paramid": "dbcolumn",
+                "paramtyp": "text",
+                "required": "Y",
+                "defaultvalue": ""
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

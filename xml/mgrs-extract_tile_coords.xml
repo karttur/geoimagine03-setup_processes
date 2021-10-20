@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<organize>
+	<userproj userid = 'karttur' projectid = 'karttur' tractid= 'karttur' siteid = '*' plotid = '*' system = 'sentinel'></userproj>
+	<period timestep='static'></period>
+	<process processid ='extractmgrscoords' dsversion = '3.0'>
+		<parameters centroid='True'></parameters>
+		<srcpath volume = "karttur" hdrfiletype = "shp" datfiletype = "shp"></srcpath>
+		<srccomp>
+
+			<mgrs-100km source = "nga" product = "mgrs" folder = "mgrs" band = "mgrs-100km" prefix = "mgrs-100km" suffix = "v1" scalefac = "1" offsetadd = "0" dataunit = "na" celltype = 'vector' cellnull = '0' measure ='N' masked='N'>
+			</mgrs-100km>
+		</srccomp>
+	</process>
+</organize>

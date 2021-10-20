@@ -1,0 +1,3120 @@
+{
+  "manageprocess": {
+    "userproj": {
+      "@userid": "karttur",
+      "@projectid": "karttur",
+      "@tractid": "karttur",
+      "@siteid": "*",
+      "@plotid": "*",
+      "@system": "system"
+    },
+    "path": null,
+    "process": [
+      {
+        "@processid": "addrootproc",
+        "overwrite": "Y",
+        "delete": "N",
+        "parameters": {
+          "@rootprocid": "TimeSeriesGraph",
+          "title": "Timeseries analysis",
+          "label": "Timeseries analysis"
+        }
+      },
+      {
+        "@processid": "addsubproc",
+        "overwrite": "Y",
+        "delete": "N",
+        "system": {
+          "procsys": {
+            "@system": "ancillary",
+            "@srcsystem": "ancillary",
+            "@dstsystem": "ancillary",
+            "@srcdivision": "region",
+            "@dstdivision": "region"
+          }
+        },
+        "parameters": {
+          "@rootprocid": "TimeSeriesGraph",
+          "@subprocid": "tsgraphancillary",
+          "@version": "0.8.0",
+          "@minuserstratum": "1",
+          "title": "Create time series graph"
+        },
+        "node": [
+          {
+            "@parent": "process",
+            "@element": "parameters",
+            "@required": "Y",
+            "parameter": [
+              {
+                "@paramid": "version",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.3"
+              },
+              {
+                "@paramid": "mirrorlag",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "maxlag",
+                "@paramtyp": "integer",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "12"
+              },
+              {
+                "@paramid": "x",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "y",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "xlabel",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "Date"
+              },
+              {
+                "@paramid": "ylabel",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "none"
+              },
+              {
+                "@paramid": "title",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "none"
+              },
+              {
+                "@paramid": "grid",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "format",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "linewidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "linestyle",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "solid"
+              },
+              {
+                "@paramid": "color",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "b"
+              },
+              {
+                "@paramid": "legend",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "figwidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "8.0"
+              },
+              {
+                "@paramid": "figheight",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "6.0"
+              },
+              {
+                "@paramid": "fontsize",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "12.0"
+              },
+              {
+                "@paramid": "legendfontsize",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "12"
+              },
+              {
+                "@paramid": "titlefontsize",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "12"
+              },
+              {
+                "@paramid": "figdpi",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "80"
+              },
+              {
+                "@paramid": "savedpi",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "300"
+              }
+            ]
+          },
+          {
+            "@parent": "process",
+            "@element": "srcpath",
+            "parameter": [
+              {
+                "@paramid": "volume",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "hdrfiletype",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": "tif"
+              },
+              {
+                "@paramid": "datfiletype",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": ""
+              }
+            ]
+          },
+          {
+            "@parent": "process",
+            "@element": "dstpath",
+            "parameter": [
+              {
+                "@paramid": "volume",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "hdrfiletype",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": "png"
+              },
+              {
+                "@paramid": "datfiletype",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": ""
+              }
+            ]
+          },
+          {
+            "@parent": "process",
+            "@element": "srccomp",
+            "parameter": [
+              {
+                "@paramid": "*",
+                "@paramtyp": "element",
+                "@tagorattr": "E",
+                "@required": "E",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "parent",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "process"
+              },
+              {
+                "@paramid": "element",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "*"
+              }
+            ]
+          },
+          {
+            "@parent": "srccomp",
+            "@element": "*",
+            "parameter": [
+              {
+                "@paramid": "source",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "product",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "folder",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "band",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": "*"
+              },
+              {
+                "@paramid": "prefix",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "suffix",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": ""
+              }
+            ]
+          },
+          {
+            "@parent": "process",
+            "@element": "xy",
+            "parameter": [
+              {
+                "@paramid": "id",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "x",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "y",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "obsformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "tendencyformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "trendformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "obscolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "b"
+              },
+              {
+                "@paramid": "tendencycolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "b"
+              },
+              {
+                "@paramid": "trendcolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "k"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "@processid": "addsubproc",
+        "overwrite": "Y",
+        "delete": "N",
+        "system": {
+          "procsys": {
+            "@system": "ancillary",
+            "@srcsystem": "ancillary",
+            "@dstsystem": "ancillary",
+            "@srcdivision": "NA",
+            "@dstdivision": "NA"
+          }
+        },
+        "parameters": {
+          "@rootprocid": "TimeSeriesGraph",
+          "@subprocid": "plotdbtsclimate",
+          "@version": "0.8.0",
+          "@minuserstratum": "1",
+          "title": "Plot time series graph"
+        },
+        "node": [
+          {
+            "@parent": "process",
+            "@element": "parameters",
+            "@required": "Y",
+            "parameter": [
+              {
+                "@paramid": "version",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.3"
+              },
+              {
+                "@paramid": "normalize",
+                "@paramtyp": "Boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "standardize",
+                "@paramtyp": "Boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "naive",
+                "@paramtyp": "Boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False",
+                "alt": {
+                  "@True": "naive",
+                  "@False": "seasonal"
+                }
+              },
+              {
+                "@paramid": "xlabel",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "Date"
+              },
+              {
+                "@paramid": "ylabel",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "none"
+              },
+              {
+                "@paramid": "title",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "none"
+              },
+              {
+                "@paramid": "grid",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "obslinewidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "obslinestyle",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "densely dotted"
+              },
+              {
+                "@paramid": "tendencylinewidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "tendencylinestyle",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "solid"
+              },
+              {
+                "@paramid": "trendlinewidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "trendlinestyle",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "solid"
+              },
+              {
+                "@paramid": "legend",
+                "@paramtyp": "integer",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "-99"
+              },
+              {
+                "@paramid": "separate",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "pdplot",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "decompose",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "plotoriginal",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "True"
+              },
+              {
+                "@paramid": "plottendency",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "True"
+              },
+              {
+                "@paramid": "plottrend",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "naive",
+                "@paramtyp": "Boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False",
+                "alt": {
+                  "@True": "naive",
+                  "@False": "seasonal"
+                }
+              },
+              {
+                "@paramid": "yearfac",
+                "@paramtyp": "integer",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1"
+              },
+              {
+                "@paramid": "trend",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "spline"
+              },
+              {
+                "@paramid": "prefilterseason",
+                "@paramtyp": "bool",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "kernel",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "forceseason",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "True"
+              },
+              {
+                "@paramid": "alpha",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0.8"
+              },
+              {
+                "@paramid": "figwidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "8.0"
+              },
+              {
+                "@paramid": "figheight",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "6.0"
+              },
+              {
+                "@paramid": "fontsize",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "12.0"
+              },
+              {
+                "@paramid": "legendfontsize",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "12"
+              },
+              {
+                "@paramid": "titlefontsize",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "12"
+              },
+              {
+                "@paramid": "figdpi",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "80"
+              },
+              {
+                "@paramid": "savedpi",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "300"
+              }
+            ]
+          },
+          {
+            "@parent": "process",
+            "@element": "dstpath",
+            "parameter": [
+              {
+                "@paramid": "volume",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "hdrfiletype",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": "png"
+              },
+              {
+                "@paramid": "datfiletype",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": ""
+              }
+            ]
+          },
+          {
+            "@parent": "process",
+            "@element": "index",
+            "parameter": [
+              {
+                "@paramid": "id",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "obsformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "tendencyformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "trendformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "obscolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "b"
+              },
+              {
+                "@paramid": "tendencycolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "b"
+              },
+              {
+                "@paramid": "trendcolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "k"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "@processid": "addsubproc",
+        "overwrite": "Y",
+        "delete": "N",
+        "parameters": {
+          "@rootprocid": "TimeSeriesGraph",
+          "@subprocid": "autocorrdbtsclimate",
+          "@version": "0.8.0",
+          "@minuserstratum": "1",
+          "title": "Climate time-series autocorrelation, output i a graphical plot"
+        },
+        "system": {
+          "procsys": {
+            "@system": "ancillary",
+            "@srcsystem": "ancillary",
+            "@dstsystem": "ancillary",
+            "@srcdivision": "NA",
+            "@dstdivision": "NA"
+          }
+        },
+        "node": [
+          {
+            "@parent": "process",
+            "@element": "parameters",
+            "parameter": [
+              {
+                "@paramid": "version",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.3"
+              },
+              {
+                "@paramid": "normalize",
+                "@paramtyp": "Boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "standardize",
+                "@paramtyp": "Boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "nlags",
+                "@paramtyp": "integer",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1"
+              },
+              {
+                "@paramid": "partial",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "resampleseasonal",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "mirror",
+                "@paramtyp": "integer",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "naive",
+                "@paramtyp": "Boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False",
+                "alt": {
+                  "@True": "naive",
+                  "@False": "seasonal"
+                }
+              },
+              {
+                "@paramid": "xlabel",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "Date"
+              },
+              {
+                "@paramid": "ylabel",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "none"
+              },
+              {
+                "@paramid": "width",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0.8"
+              },
+              {
+                "@paramid": "alpha",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0.8"
+              },
+              {
+                "@paramid": "errbars",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "title",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "none"
+              },
+              {
+                "@paramid": "grid",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "linewidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "linestyle",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "densely dotted"
+              },
+              {
+                "@paramid": "legend",
+                "@paramtyp": "integer",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "-99"
+              },
+              {
+                "@paramid": "pdplot",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "prefilter",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "naive",
+                "@paramtyp": "Boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False",
+                "alt": {
+                  "@True": "naive",
+                  "@False": "seasonal"
+                }
+              },
+              {
+                "@paramid": "kernel",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "figwidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "8.0"
+              },
+              {
+                "@paramid": "figheight",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "6.0"
+              },
+              {
+                "@paramid": "fontsize",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "12.0"
+              },
+              {
+                "@paramid": "legendfontsize",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "12"
+              },
+              {
+                "@paramid": "titlefontsize",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "12"
+              },
+              {
+                "@paramid": "figdpi",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "80"
+              },
+              {
+                "@paramid": "savedpi",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "300"
+              }
+            ]
+          },
+          {
+            "@parent": "process",
+            "@element": "dstpath",
+            "parameter": [
+              {
+                "@paramid": "volume",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "hdrfiletype",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": "png"
+              },
+              {
+                "@paramid": "datfiletype",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": ""
+              }
+            ]
+          },
+          {
+            "@parent": "process",
+            "@element": "index",
+            "parameter": [
+              {
+                "@paramid": "id",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "color",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "b"
+              },
+              {
+                "@paramid": "edgecolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "b"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "@processid": "addsubproc",
+        "overwrite": "Y",
+        "delete": "N",
+        "system": {
+          "procsys": {
+            "@system": "ancillary",
+            "@srcsystem": "ancillary",
+            "@dstsystem": "ancillary",
+            "@srcdivision": "region",
+            "@dstdivision": "region"
+          }
+        },
+        "parameters": {
+          "@rootprocid": "TimeSeriesGraph",
+          "@subprocid": "plotdbtsancillary",
+          "@version": "0.8.0",
+          "@minuserstratum": "1",
+          "title": "Plot time series graph"
+        },
+        "node": [
+          {
+            "@parent": "process",
+            "@element": "parameters",
+            "@required": "Y",
+            "parameter": [
+              {
+                "@paramid": "version",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.3"
+              },
+              {
+                "@paramid": "normalize",
+                "@paramtyp": "Boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "standardize",
+                "@paramtyp": "Boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "naive",
+                "@paramtyp": "Boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False",
+                "alt": {
+                  "@True": "naive",
+                  "@False": "seasonal"
+                }
+              },
+              {
+                "@paramid": "yearfac",
+                "@paramtyp": "integer",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1"
+              },
+              {
+                "@paramid": "trend",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "spline"
+              },
+              {
+                "@paramid": "prefilterseason",
+                "@paramtyp": "bool",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "kernel",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "forceseason",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "True"
+              },
+              {
+                "@paramid": "xlabel",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "Date"
+              },
+              {
+                "@paramid": "ylabel",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "none"
+              },
+              {
+                "@paramid": "title",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "none"
+              },
+              {
+                "@paramid": "grid",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "obsformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "b-"
+              },
+              {
+                "@paramid": "seasonformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "g-"
+              },
+              {
+                "@paramid": "residualformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "r-"
+              },
+              {
+                "@paramid": "regressformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "k-"
+              },
+              {
+                "@paramid": "trendformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "y-"
+              },
+              {
+                "@paramid": "obslinewidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "seasonlinewidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "residuallinewidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "regresslinewidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "trendlinewidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "obslinestyle",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "solid"
+              },
+              {
+                "@paramid": "seasonlinestyle",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "solid"
+              },
+              {
+                "@paramid": "residuallinestyle",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "solid"
+              },
+              {
+                "@paramid": "regresslinestyle",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "solid"
+              },
+              {
+                "@paramid": "trendlinestyle",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "solid"
+              },
+              {
+                "@paramid": "obscolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "b"
+              },
+              {
+                "@paramid": "seasoncolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "b"
+              },
+              {
+                "@paramid": "residualcolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "b"
+              },
+              {
+                "@paramid": "regresscolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "b"
+              },
+              {
+                "@paramid": "trendcolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "b"
+              },
+              {
+                "@paramid": "legend",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "figwidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "8.0"
+              },
+              {
+                "@paramid": "figheight",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "6.0"
+              },
+              {
+                "@paramid": "fontsize",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "12.0"
+              },
+              {
+                "@paramid": "legendfontsize",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "12"
+              },
+              {
+                "@paramid": "titlefontsize",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "12"
+              },
+              {
+                "@paramid": "figdpi",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "80"
+              },
+              {
+                "@paramid": "savedpi",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "300"
+              }
+            ]
+          },
+          {
+            "@parent": "process",
+            "@element": "dstpath",
+            "parameter": [
+              {
+                "@paramid": "volume",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "hdrfiletype",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": "png"
+              },
+              {
+                "@paramid": "datfiletype",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": ""
+              }
+            ]
+          },
+          {
+            "@parent": "process",
+            "@element": "srccomp",
+            "parameter": [
+              {
+                "@paramid": "*",
+                "@paramtyp": "element",
+                "@tagorattr": "E",
+                "@required": "E",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "parent",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "process"
+              },
+              {
+                "@paramid": "element",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "*"
+              }
+            ]
+          },
+          {
+            "@parent": "srccomp",
+            "@element": "*",
+            "parameter": [
+              {
+                "@paramid": "source",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "product",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "folder",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "band",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": "*"
+              },
+              {
+                "@paramid": "prefix",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "suffix",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": ""
+              }
+            ]
+          },
+          {
+            "@parent": "process",
+            "@element": "stats",
+            "parameter": [
+              {
+                "@paramid": "id",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "band",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "@processid": "addsubproc",
+        "overwrite": "Y",
+        "delete": "N",
+        "system": {
+          "procsys": {
+            "@system": "ancillary",
+            "@srcsystem": "ancillary",
+            "@dstsystem": "ancillary",
+            "@srcdivision": "region",
+            "@dstdivision": "region"
+          }
+        },
+        "parameters": {
+          "@rootprocid": "TimeSeriesGraph",
+          "@subprocid": "componentdbtsgraphancillary",
+          "@version": "0.8.0",
+          "@minuserstratum": "1",
+          "title": "Create time series graph"
+        },
+        "node": [
+          {
+            "@parent": "process",
+            "@element": "parameters",
+            "parameter": [
+              {
+                "@paramid": "version",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.3"
+              },
+              {
+                "@paramid": "normalize",
+                "@paramtyp": "Boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "standardize",
+                "@paramtyp": "Boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "naive",
+                "@paramtyp": "Boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False",
+                "alt": {
+                  "@True": "naive",
+                  "@False": "seasonal"
+                }
+              },
+              {
+                "@paramid": "additive",
+                "@paramtyp": "Boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "True",
+                "alt": {
+                  "@True": "additive",
+                  "@False": "multiplicative"
+                }
+              },
+              {
+                "@paramid": "yearfac",
+                "@paramtyp": "integer",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1"
+              },
+              {
+                "@paramid": "trend",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "spline"
+              },
+              {
+                "@paramid": "prefilterseason",
+                "@paramtyp": "bool",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "kernel",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "forceseason",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "True"
+              },
+              {
+                "@paramid": "xlabel",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "Date"
+              },
+              {
+                "@paramid": "ylabel",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "none"
+              },
+              {
+                "@paramid": "sharey",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "title",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "none"
+              },
+              {
+                "@paramid": "grid",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "obsformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "b-"
+              },
+              {
+                "@paramid": "seasonformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "g-"
+              },
+              {
+                "@paramid": "residualformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "r-"
+              },
+              {
+                "@paramid": "regressformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "k-"
+              },
+              {
+                "@paramid": "tendencyformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "y-"
+              },
+              {
+                "@paramid": "obslinewidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "seasonlinewidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "residuallinewidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "seasonlinewidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "regresslinewidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "tendencylinewidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "obslinestyle",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "solid"
+              },
+              {
+                "@paramid": "seasonlinestyle",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "solid"
+              },
+              {
+                "@paramid": "residuallinestyle",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "solid"
+              },
+              {
+                "@paramid": "seasonlinestyle",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "solid"
+              },
+              {
+                "@paramid": "regresslinestyle",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "solid"
+              },
+              {
+                "@paramid": "tendencylinestyle",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "solid"
+              },
+              {
+                "@paramid": "legend",
+                "@paramtyp": "integer",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "-99"
+              },
+              {
+                "@paramid": "figwidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "8.0"
+              },
+              {
+                "@paramid": "figheight",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "6.0"
+              },
+              {
+                "@paramid": "fontsize",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "12.0"
+              },
+              {
+                "@paramid": "legendfontsize",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "12"
+              },
+              {
+                "@paramid": "titlefontsize",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "12"
+              },
+              {
+                "@paramid": "figdpi",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "80"
+              },
+              {
+                "@paramid": "savedpi",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "300"
+              }
+            ]
+          },
+          {
+            "@parent": "process",
+            "@element": "index",
+            "parameter": [
+              {
+                "@paramid": "id",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "obsformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "seasonformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "residualformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "tendencyformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "regressformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "obscolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "b"
+              },
+              {
+                "@paramid": "tendencycolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "b"
+              },
+              {
+                "@paramid": "seasoncolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "b"
+              },
+              {
+                "@paramid": "residualcolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "k"
+              },
+              {
+                "@paramid": "regresscolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "k"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "@processid": "addsubproc",
+        "overwrite": "Y",
+        "delete": "N",
+        "system": {
+          "procsys": {
+            "@system": "ancillary",
+            "@srcsystem": "ancillary",
+            "@dstsystem": "ancillary",
+            "@srcdivision": "region",
+            "@dstdivision": "region"
+          }
+        },
+        "parameters": {
+          "@rootprocid": "TimeSeriesGraph",
+          "@subprocid": "componentcomptsgraphancillary",
+          "@version": "0.8.0",
+          "@minuserstratum": "1",
+          "title": "Create time series graph"
+        },
+        "node": [
+          {
+            "@parent": "process",
+            "@element": "parameters",
+            "parameter": [
+              {
+                "@paramid": "version",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.3"
+              },
+              {
+                "@paramid": "normalize",
+                "@paramtyp": "Boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "standardize",
+                "@paramtyp": "Boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "naive",
+                "@paramtyp": "Boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False",
+                "alt": {
+                  "@True": "naive",
+                  "@False": "seasonal"
+                }
+              },
+              {
+                "@paramid": "additive",
+                "@paramtyp": "Boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "True",
+                "alt": {
+                  "@True": "additive",
+                  "@False": "multiplicative"
+                }
+              },
+              {
+                "@paramid": "yearfac",
+                "@paramtyp": "integer",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1"
+              },
+              {
+                "@paramid": "trend",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "spline"
+              },
+              {
+                "@paramid": "prefilterseason",
+                "@paramtyp": "bool",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "kernel",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "forceseason",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "True"
+              },
+              {
+                "@paramid": "xlabel",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "Date"
+              },
+              {
+                "@paramid": "ylabel",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "none"
+              },
+              {
+                "@paramid": "sharey",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "title",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "none"
+              },
+              {
+                "@paramid": "grid",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "obsformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "b-"
+              },
+              {
+                "@paramid": "seasonformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "g-"
+              },
+              {
+                "@paramid": "residualformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "r-"
+              },
+              {
+                "@paramid": "regressformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "k-"
+              },
+              {
+                "@paramid": "tendencyformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "y-"
+              },
+              {
+                "@paramid": "obslinewidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "seasonlinewidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "residuallinewidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "seasonlinewidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "regresslinewidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "tendencylinewidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "obslinestyle",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "solid"
+              },
+              {
+                "@paramid": "seasonlinestyle",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "solid"
+              },
+              {
+                "@paramid": "residuallinestyle",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "solid"
+              },
+              {
+                "@paramid": "seasonlinestyle",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "solid"
+              },
+              {
+                "@paramid": "regresslinestyle",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "solid"
+              },
+              {
+                "@paramid": "tendencylinestyle",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "solid"
+              },
+              {
+                "@paramid": "legend",
+                "@paramtyp": "integer",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "-99"
+              },
+              {
+                "@paramid": "figwidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "8.0"
+              },
+              {
+                "@paramid": "figheight",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "6.0"
+              },
+              {
+                "@paramid": "fontsize",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "12.0"
+              },
+              {
+                "@paramid": "legendfontsize",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "12"
+              },
+              {
+                "@paramid": "titlefontsize",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "12"
+              },
+              {
+                "@paramid": "figdpi",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "80"
+              },
+              {
+                "@paramid": "savedpi",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "300"
+              }
+            ]
+          },
+          {
+            "@parent": "process",
+            "@element": "srcpath",
+            "parameter": [
+              {
+                "@paramid": "volume",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "hdrfiletype",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": "tif"
+              },
+              {
+                "@paramid": "datfiletype",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": ""
+              }
+            ]
+          },
+          {
+            "@parent": "process",
+            "@element": "dstpath",
+            "parameter": [
+              {
+                "@paramid": "volume",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "hdrfiletype",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": "png"
+              },
+              {
+                "@paramid": "datfiletype",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": ""
+              }
+            ]
+          },
+          {
+            "@parent": "process",
+            "@element": "srccomp",
+            "parameter": [
+              {
+                "@paramid": "*",
+                "@paramtyp": "element",
+                "@tagorattr": "E",
+                "@required": "E",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "parent",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "process"
+              },
+              {
+                "@paramid": "element",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "*"
+              }
+            ]
+          },
+          {
+            "@parent": "srccomp",
+            "@element": "*",
+            "parameter": [
+              {
+                "@paramid": "source",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "product",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "folder",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "band",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": "*"
+              },
+              {
+                "@paramid": "prefix",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "suffix",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": ""
+              }
+            ]
+          },
+          {
+            "@parent": "process",
+            "@element": "xy",
+            "parameter": [
+              {
+                "@paramid": "id",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "epsg",
+                "@paramtyp": "integer",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "x",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "y",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "obsformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "seasonformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "residualformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "tendencyformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "regressformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "obscolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "b"
+              },
+              {
+                "@paramid": "tendencycolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "b"
+              },
+              {
+                "@paramid": "seasoncolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "b"
+              },
+              {
+                "@paramid": "residualcolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "k"
+              },
+              {
+                "@paramid": "regresscolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "k"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "@processid": "addsubproc",
+        "overwrite": "Y",
+        "delete": "N",
+        "system": {
+          "procsys": {
+            "@system": "ancillary",
+            "@srcsystem": "ancillary",
+            "@dstsystem": "ancillary",
+            "@srcdivision": "region",
+            "@dstdivision": "region"
+          }
+        },
+        "parameters": {
+          "@rootprocid": "TimeSeriesGraph",
+          "@subprocid": "indexcompxcrosstsgraphancillary",
+          "@version": "0.8.0",
+          "@minuserstratum": "1",
+          "title": "Create time series graph"
+        },
+        "node": [
+          {
+            "@parent": "process",
+            "@element": "parameters",
+            "parameter": [
+              {
+                "@paramid": "version",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.3"
+              },
+              {
+                "@paramid": "mirrorlag",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "True"
+              },
+              {
+                "@paramid": "maxlag",
+                "@paramtyp": "integer",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "-1"
+              },
+              {
+                "@paramid": "normalize",
+                "@paramtyp": "Boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "standardize",
+                "@paramtyp": "Boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "True"
+              },
+              {
+                "@paramid": "naive",
+                "@paramtyp": "Boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False",
+                "alt": {
+                  "@True": "naive",
+                  "@False": "seasonal"
+                }
+              },
+              {
+                "@paramid": "additive",
+                "@paramtyp": "Boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "True",
+                "alt": {
+                  "@True": "additive",
+                  "@False": "multiplicative"
+                }
+              },
+              {
+                "@paramid": "yearfac",
+                "@paramtyp": "integer",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1"
+              },
+              {
+                "@paramid": "trend",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "spline"
+              },
+              {
+                "@paramid": "prefilterseason",
+                "@paramtyp": "bool",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "kernel",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "forceseason",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "True"
+              },
+              {
+                "@paramid": "abs",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "xcrossobserved",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "True"
+              },
+              {
+                "@paramid": "xcrosstendency",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "xcrosseason",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "xcrossresidual",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "xcrosspearson",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "True"
+              },
+              {
+                "@paramid": "xcrosslag",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "True"
+              },
+              {
+                "@paramid": "xlabel",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "Date"
+              },
+              {
+                "@paramid": "ylabel",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "none"
+              },
+              {
+                "@paramid": "sharey",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "title",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "Cross correlation"
+              },
+              {
+                "@paramid": "grid",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "lagplot",
+                "@paramtyp": "boolean",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "False"
+              },
+              {
+                "@paramid": "obslinewidthindex",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "seasonlinewidthindex",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "residuallinewidthindex",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "tendencylinewidthindex",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "obslinestyleindex",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "solid"
+              },
+              {
+                "@paramid": "seasonlinestyleindex",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "solid"
+              },
+              {
+                "@paramid": "residuallinestyleindex",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "solid"
+              },
+              {
+                "@paramid": "tendencylinestyleindex",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "solid"
+              },
+              {
+                "@paramid": "obslinewidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "seasonlinewidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "residuallinewidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "tendencylinewidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "1.0"
+              },
+              {
+                "@paramid": "obslinestyle",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "densely dotted"
+              },
+              {
+                "@paramid": "seasonlinestyle",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "densely dotted"
+              },
+              {
+                "@paramid": "residuallinestyle",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "densely dotted"
+              },
+              {
+                "@paramid": "tendencylinestyle",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "densely dotted"
+              },
+              {
+                "@paramid": "legend",
+                "@paramtyp": "integer",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "-99"
+              },
+              {
+                "@paramid": "figwidth",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "8.0"
+              },
+              {
+                "@paramid": "figheight",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "6.0"
+              },
+              {
+                "@paramid": "fontsize",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "12.0"
+              },
+              {
+                "@paramid": "legendfontsize",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "12"
+              },
+              {
+                "@paramid": "titlefontsize",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "12"
+              },
+              {
+                "@paramid": "figdpi",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "80"
+              },
+              {
+                "@paramid": "savedpi",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "300"
+              }
+            ]
+          },
+          {
+            "@parent": "process",
+            "@element": "srcpath",
+            "parameter": [
+              {
+                "@paramid": "volume",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "hdrfiletype",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": "tif"
+              },
+              {
+                "@paramid": "datfiletype",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": ""
+              }
+            ]
+          },
+          {
+            "@parent": "process",
+            "@element": "dstpath",
+            "parameter": [
+              {
+                "@paramid": "volume",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "hdrfiletype",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": "png"
+              },
+              {
+                "@paramid": "datfiletype",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": ""
+              }
+            ]
+          },
+          {
+            "@parent": "process",
+            "@element": "srccomp",
+            "parameter": [
+              {
+                "@paramid": "*",
+                "@paramtyp": "element",
+                "@tagorattr": "E",
+                "@required": "E",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "parent",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "process"
+              },
+              {
+                "@paramid": "element",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "*"
+              }
+            ]
+          },
+          {
+            "@parent": "srccomp",
+            "@element": "*",
+            "parameter": [
+              {
+                "@paramid": "source",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "product",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "folder",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "band",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": "*"
+              },
+              {
+                "@paramid": "prefix",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "suffix",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": ""
+              }
+            ]
+          },
+          {
+            "@parent": "process",
+            "@element": "xy",
+            "parameter": [
+              {
+                "@paramid": "id",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "epsg",
+                "@paramtyp": "integer",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "x",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "y",
+                "@paramtyp": "real",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "obsformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "seasonformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "residualformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "tendencyformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "obscolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "b"
+              },
+              {
+                "@paramid": "tendencycolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "b"
+              },
+              {
+                "@paramid": "seasoncolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "b"
+              },
+              {
+                "@paramid": "residualcolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "k"
+              }
+            ]
+          },
+          {
+            "@parent": "process",
+            "@element": "index",
+            "parameter": [
+              {
+                "@paramid": "id",
+                "@paramtyp": "text",
+                "@tagorattr": "Attr",
+                "@required": "Y",
+                "@defaultvalue": ""
+              },
+              {
+                "@paramid": "obsformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "seasonformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "residualformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "tendencyformat",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "0"
+              },
+              {
+                "@paramid": "obscolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "b"
+              },
+              {
+                "@paramid": "tendencycolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "b"
+              },
+              {
+                "@paramid": "seasoncolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "b"
+              },
+              {
+                "@paramid": "residualcolor",
+                "@paramtyp": "string",
+                "@tagorattr": "Attr",
+                "@required": "N",
+                "@defaultvalue": "k"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

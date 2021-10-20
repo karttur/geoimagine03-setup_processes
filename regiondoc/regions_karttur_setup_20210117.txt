@@ -1,0 +1,29 @@
+###### REGIONS #####
+
+#add_region_categories_v80.json Adds region categories to the db
+# OK # json/add_region_categories_v090.json
+
+#add_arbitrary_default_regions_vXX.json Adds global default regions to the db
+# OK # json/add_arbitrary_default_regions_v090.json
+
+#add_arctic_default_regions_vXX.json Adds global arctic regions to the db
+# OK # json/add_arctic_default_regions_v090.json
+
+#add_arctic_ease2n_regions_vXX.json Adds global arctic regions in EASE-grid 6931 to the db
+## json/add_arctic_ease2n_regions_v090.json
+
+# add_arctic_hydro_regions_vXX adds hydrological regions for ease2n
+### REPLACED THE REGIONS SHOULD BE REMOVED
+## json/add_arctic_hydro_regions_v090.json
+## NEW VERSION
+json/add_ease2n_hydro_regions_v090.json
+
+#ancillary-import-kartturROI_2014.json Imports global countries
+# OK # json/ancillary-import-kartturROI_2014_v090.json
+
+#Adds countries, subregions and continents to the db
+# OK # json/add_default_regions_from-vector_v090.json
+
+#add_sub-sharan-africa_default_regions_vXX.json Adds Sub saharan africa region to the db
+#Requires that the global country and continent data are added
+# OK # json/add_Africa-Sub_Sahara_default-region_v090.json

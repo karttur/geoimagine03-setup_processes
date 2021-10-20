@@ -1,0 +1,31 @@
+{
+  "userproject": {
+    "userid": "karttur",
+    "projectid": "karttur",
+    "tractid": "karttur",
+    "siteid": "*",
+    "plotid": "*",
+    "system": "system"
+  },
+  "process": [
+    {
+      "processid": "DefaultRegionFromCoords",
+      "overwrite": false,
+      "parameters": {
+        "regioncat": "subcontinent",
+        "regionid": "africasubsahara",
+        "regionname": "Africa South of Sahara",
+        "parentid": "africa",
+        "parentcat": "continent",
+        "stratum": "4",
+        "minx": -16,
+        "miny": -35.2,
+        "maxx": 52,
+        "maxy": 9.9999,
+        "version": "1.0",
+        "title": "Sub-saharan Africa",
+        "label": "Africa South of the Sahara."
+      }
+    }
+  ]
+}

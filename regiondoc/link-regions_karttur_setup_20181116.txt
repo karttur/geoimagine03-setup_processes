@@ -1,0 +1,20 @@
+###### LINK REGIONS #####
+
+#'''Link MODIS tile postions to regions - this takes a very long time, and thus the restore should be run prior to adding any new links'''
+#THIS IS NOW SPEEDED UP
+#regions-modtiles_v80.xml
+
+#''' Restore all existing links between landsat WRS postions and regions'''
+#processLL.append(ReadXML('/Users/thomasg/Dropbox/projects/karttur_gis_v70/processes/sqldumps/copy_regionswrs_sqldump_v70.xml'))
+
+#''' Link landsat WRS postions to regions - this takes a very long time, and thus the restore should be run prior to adding any new links'''
+#processLL.append(ReadXML('/Users/thomasg/Dropbox/projects/karttur_gis_v70/processes/region/xml/regions-landsat-wrs_v70.xml'))
+
+#''' Create a shape file of the modis tiles, reprojected to lonlat'''
+#processLL.append(ReadXML('/Users/thomasg/Dropbox/projects/karttur_gis_v70/processes/spatialdb/xml/modistile_to_shape_v70.xml'))
+
+#''' Restore all existing links between modis postions and regions'''
+#processLL.append(ReadXML('/Users/thomasg/Dropbox/projects/karttur_gis_v70/processes/sqldumps/copy_regionsmodis_sqldump_v70.xml'))
+
+#''' Link MODIS tile postions to regions - this takes a very long time, and thus the restore should be run prior to adding any new links'''
+#processLL.append(ReadXML('/Users/thomasg/Dropbox/projects/karttur_gis_v70/processes/region/xml/regions-modtiles_v70.xml'))

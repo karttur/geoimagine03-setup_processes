@@ -1,0 +1,155 @@
+{
+  "postgresdb": {
+    "db": "geoimagine"
+  },
+  "userproject": {
+    "userid": "karttur",
+    "projectid": "karttur",
+    "tractid": "karttur",
+    "siteid": "*",
+    "plotid": "*",
+    "system": "system"
+  },
+  "process": [
+    {
+      "processid": "addsubproc",
+      "parameters": {
+        "rootprocid": "ManageRegion",
+        "subprocid": "tractextent",
+        "version": "0.9.0",
+        "minuserstratum": 3,
+        "title": "Define tract from extent",
+        "hint": "Automatically define tract from extent of vector data set"
+      },
+      "system": [
+        {
+          "system": "system",
+          "srcsystem": "system",
+          "dstsystem": "region",
+          "srcdivision": "NA",
+          "dstdivision": "region",
+          "srcepsg": 0,
+          "dstepsg": 4326
+        }
+      ],
+      "nodes": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": [
+            {
+              "paramid": "defaultregion",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "",
+              "hint": "Select a default region to use for defining your tract"
+            },
+            {
+              "paramid": "tractid",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "",
+              "hint": "Set a unique tractid"
+            },
+            {
+              "paramid": "tracttitle",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "",
+              "hint": "Give a title for the new tract (for maps)"
+            },
+            {
+              "paramid": "tractlabel",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "hint": "Give a label for the tract"
+            },
+            {
+              "paramid": "buffer",
+              "paramtyp": "float",
+              "required": false,
+              "defaultvalue": 0,
+              "hint": "Buffer in map units to expand region comapred to data points"
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srccomp",
+          "parameter": [
+            {
+              "paramid": "srctractextent",
+              "paramtyp": "element",
+              "required": true,
+              "defaultvalue": "",
+              "hint": "Hierarchical pointer"
+            },
+            {
+              "paramid": "parent",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "process",
+              "hint": "Hierarchical object parent (for internal use)"
+            },
+            {
+              "paramid": "element",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "process",
+              "hint": "Default hierarchical child name"
+            }
+          ]
+        },
+        {
+          "parent": "srccomp",
+          "element": "srctractextent",
+          "parameter": [
+            {
+              "paramid": "source",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "",
+              "hint": "Dataset source (e.g. sensor, method, model, etc (hyphen allowed, underscore not allowd)"
+            },
+            {
+              "paramid": "product",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "",
+              "hint": "Dataset type, product, producer etc  (hyphen allowed, underscore not allowd)"
+            },
+            {
+              "paramid": "content",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "",
+              "hint": "Dataset content (hyphen allowed, underscore not allowd)"
+            },
+            {
+              "paramid": "layerid",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "",
+              "hint": "Dataset layer or band id"
+            },
+            {
+              "paramid": "prefix",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "",
+              "hint": "File name prefix"
+            },
+            {
+              "paramid": "suffix",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "",
+              "hint": "Additional identifier, e.g. version or model etc (hyphen allowed, underscore not allowed)"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

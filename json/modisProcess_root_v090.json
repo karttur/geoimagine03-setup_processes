@@ -1,0 +1,24 @@
+{
+  "postgresdb": {
+    "db": "geoimagine"
+  },
+  "userproject": {
+    "userid": "karttur",
+    "projectid": "karttur",
+    "tractid": "karttur",
+    "siteid": "*",
+    "plotid": "*",
+    "system": "system"
+  },
+  "process": [
+    {
+      "processid": "addrootproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "MODISProc",
+        "title": "Manage MODIS processes",
+        "label": "Specific MODIS processes (order, download, organize)"
+      }
+    }
+  ]
+}

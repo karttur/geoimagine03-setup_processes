@@ -1,0 +1,372 @@
+{
+  "postgresdb": {
+    "db": "geoimagine"
+  },
+  "userproject": {
+    "userid": "karttur",
+    "projectid": "karttur",
+    "tractid": "karttur",
+    "siteid": "*",
+    "plotid": "*",
+    "system": "system"
+  },
+  "process": [
+    {
+      "processid": "addsubproc",
+      "overwrite": true,
+      "parameters": {
+        "rootprocid": "TimeSeries",
+        "subprocid": "TimeSeriesSignificantTrends",
+        "version": "0.9.0",
+        "minuserstratum": 7,
+        "title": "Significant time series trends"
+      },
+      "system": [
+        {
+          "system": "ancillary",
+          "srcsystem": "ancillary",
+          "dstsystem": "ancillary",
+          "srcdivision": "region",
+          "dstdivision": "region",
+          "srcepsg": 0,
+          "dstepsg": 0
+        },
+        {
+          "system": "modis",
+          "srcsystem": "modis",
+          "dstsystem": "modis",
+          "srcdivision": "region",
+          "dstdivision": "region",
+          "srcepsg": 0,
+          "dstepsg": 0
+        },
+        {
+          "system": "smap",
+          "srcsystem": "smap",
+          "dstsystem": "smap",
+          "srcdivision": "region",
+          "dstdivision": "region",
+          "srcepsg": 0,
+          "dstepsg": 0
+        },
+        {
+          "system": "modis",
+          "srcsystem": "modis",
+          "dstsystem": "modis",
+          "srcdivision": "tiles",
+          "dstdivision": "tiles",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      ],
+      "nodes": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": [
+            {
+              "paramid": "copycomp",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "signiftrend"
+            },
+            {
+              "paramid": "basename",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "threshold",
+              "paramtyp": "real",
+              "required": true,
+              "defaultvalue": "1.96"
+            },
+            {
+              "paramid": "neg",
+              "paramtyp": "boolean",
+              "required": false,
+              "defaultvalue": "True"
+            },
+            {
+              "paramid": "pos",
+              "paramtyp": "boolean",
+              "required": false,
+              "defaultvalue": "True"
+            },
+            {
+              "paramid": "onlysignif",
+              "paramtyp": "boolean",
+              "required": false,
+              "defaultvalue": "False"
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srcpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdr",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "tif"
+            },
+            {
+              "paramid": "dat",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "dstpath",
+          "parameter": [
+            {
+              "paramid": "volume",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "hdr",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "tif"
+            },
+            {
+              "paramid": "dat",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srccomp",
+          "parameter": [
+            {
+              "paramid": "timeseries",
+              "paramtyp": "element",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "parent",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "process"
+            },
+            {
+              "paramid": "element",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "timeseries"
+            }
+          ]
+        },
+        {
+          "parent": "srccomp",
+          "element": "timeseries",
+          "parameter": [
+            {
+              "paramid": "id",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "significance"
+            },
+            {
+              "paramid": "source",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "product",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "content",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "layerid",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "timeseries"
+            },
+            {
+              "paramid": "prefix",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "suffix",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srccomp",
+          "parameter": [
+            {
+              "paramid": "seasonal",
+              "paramtyp": "element",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "parent",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "process"
+            },
+            {
+              "paramid": "element",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "seasonal"
+            }
+          ]
+        },
+        {
+          "parent": "srccomp",
+          "element": "seasonal",
+          "parameter": [
+            {
+              "paramid": "id",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "slope"
+            },
+            {
+              "paramid": "source",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "product",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "content",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "layerid",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "seasonal"
+            },
+            {
+              "paramid": "prefix",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "suffix",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        },
+        {
+          "parent": "process",
+          "element": "srccomp",
+          "parameter": [
+            {
+              "paramid": "layer3",
+              "paramtyp": "element",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "parent",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "process"
+            },
+            {
+              "paramid": "element",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": "layer3"
+            }
+          ]
+        },
+        {
+          "parent": "srccomp",
+          "element": "layer3",
+          "parameter": [
+            {
+              "paramid": "id",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "intercept"
+            },
+            {
+              "paramid": "source",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "product",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "content",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "layerid",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "layer3"
+            },
+            {
+              "paramid": "prefix",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            },
+            {
+              "paramid": "suffix",
+              "paramtyp": "text",
+              "required": false,
+              "defaultvalue": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
