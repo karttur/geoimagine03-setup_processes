@@ -16,163 +16,27 @@
       "overwrite": true,
       "parameters": {
         "rootprocid": "MODISProc",
-        "subprocid": "ExplodeMODISSingleTile",
-        "version": "0.8.0",
-        "minuserstratum": 7,
-        "title": "Extracts the content of modis scenes>",
-        "label": "Scenes must be organized prior to extration"
-      },
-      "system": {
-        "procsys": {
-          "system": "modis",
-          "srcsystem": "modis",
-          "dstsystem": "modis",
-          "srcdivision": "tiles",
-          "dstdivision": "tiles"
-        }
-      },
-      "nodes": [
-        {
-          "parent": "process",
-          "parameter": [
-            {
-              "paramid": "exploded",
-              "paramtyp": "bool",
-              "required": false,
-              "defaultvalue": "False",
-              "hint": "to be completed"
-            },
-            {
-              "paramid": "asscript",
-              "paramtyp": "bool",
-              "required": false,
-              "defaultvalue": "True",
-              "hint": "to be completed"
-            },
-            {
-              "paramid": "product",
-              "paramtyp": "text",
-              "required": true,
-              "defaultvalue": "",
-              "hint": "to be completed",
-              "setvalue": [
-                {
-                  "value": "MCD43A4",
-                  "label": "MCD43A4"
-                }
-              ]
-            },
-            {
-              "paramid": "version",
-              "paramtyp": "text",
-              "required": true,
-              "defaultvalue": "",
-              "setvalue": [
-                {
-                  "value": "005",
-                  "label": "version 005"
-                },
-                {
-                  "value": "006",
-                  "label": "version 006"
-                }
-              ]
-            },
-            {
-              "paramid": "htile",
-              "paramtyp": "integer",
-              "required": true,
-              "defaultvalue": "",
-              "hint": "to be completed"
-            },
-            {
-              "paramid": "vtile",
-              "paramtyp": "integer",
-              "required": true,
-              "defaultvalue": "",
-              "hint": "to be completed"
-            }
-          ]
-        },
-        {
-          "parent": "process",
-          "element": "srcpath",
-          "parameter": [
-            {
-              "paramid": "volume",
-              "paramtyp": "text",
-              "required": true,
-              "defaultvalue": "",
-              "hint": "to be completed"
-            },
-            {
-              "paramid": "hdr",
-              "paramtyp": "text",
-              "required": false,
-              "defaultvalue": "hdf",
-              "hint": "to be completed"
-            },
-            {
-              "paramid": "dat",
-              "paramtyp": "text",
-              "required": false,
-              "defaultvalue": "",
-              "hint": "to be completed"
-            }
-          ]
-        },
-        {
-          "parent": "process",
-          "element": "dstpath",
-          "parameter": [
-            {
-              "paramid": "volume",
-              "paramtyp": "text",
-              "required": true,
-              "defaultvalue": "",
-              "hint": "to be completed"
-            },
-            {
-              "paramid": "hdr",
-              "paramtyp": "text",
-              "required": false,
-              "defaultvalue": "tif",
-              "hint": "to be completed"
-            },
-            {
-              "paramid": "dat",
-              "paramtyp": "text",
-              "required": false,
-              "defaultvalue": "",
-              "hint": "to be completed"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "processid": "addsubproc",
-      "overwrite": true,
-      "parameters": {
-        "rootprocid": "MODISProc",
         "subprocid": "ExplodeMODISRegion",
         "version": "0.8.0",
         "minuserstratum": 7,
-        "title": "Extracts the content of modis scenes>",
+        "title": "Extracts the content of modis scenes",
         "label": "Scenes must be organized prior to extration"
       },
-      "system": {
-        "procsys": {
+      "system": [
+        {
           "system": "modis",
           "srcsystem": "modis",
           "dstsystem": "modis",
           "srcdivision": "tiles",
-          "dstdivision": "tiles"
+          "dstdivision": "tiles",
+          "srcepsg": 0,
+          "dstepsg": 0
         }
-      },
+      ],
       "nodes": [
         {
           "parent": "process",
+          "element": "parameters",
           "parameter": [
             {
               "paramid": "exploded",
@@ -284,18 +148,52 @@
         "subprocid": "MissingModisTiles",
         "version": "0.8.0",
         "minuserstratum": 7,
-        "title": "Copies closest neighboring tile to missing>",
+        "title": "Copies closest neighboring tile to missing",
         "label": "Copies closest neighboring tile to missing"
       },
+      "system": [
+        {
+          "system": "modis",
+          "srcsystem": "modis",
+          "dstsystem": "modis",
+          "srcdivision": "tiles",
+          "dstdivision": "tiles",
+          "srcepsg": 0,
+          "dstepsg": 0
+        }
+      ],
       "nodes": [
         {
           "parent": "process",
-          "parameter": {
-            "paramid": "version",
-            "paramtyp": "text",
-            "required": false,
-            "defaultvalue": "1.3"
-          }
+          "element": "parameters",
+          "parameter": [
+            {
+              "paramid": "product",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "MCD43A4",
+              "hint": "MODIS product to search",
+              "setvalue": [
+                {
+                  "value": "MCD43A4",
+                  "label": "MCD43A4"
+                }
+              ]
+            },
+            {
+              "paramid": "version",
+              "paramtyp": "text",
+              "required": true,
+              "defaultvalue": "006",
+              "hint": "product version to search",
+              "setvalue": [
+                {
+                  "value": "006",
+                  "label": "006"
+                }
+              ]
+            }
+          ]
         },
         {
           "parent": "process",
@@ -430,18 +328,21 @@
         "title": "Tile regional SMAP data to fit modis",
         "label": "Tile regional SMAP data to fit modis"
       },
-      "system": {
-        "procsys": {
+      "system": [
+        {
           "system": "modis",
           "srcsystem": "modis",
           "dstsystem": "modis",
           "srcdivision": "tiles",
-          "dstdivision": "tiles"
+          "dstdivision": "tiles",
+          "srcepsg": 0,
+          "dstepsg": 0
         }
-      },
+      ],
       "nodes": [
         {
           "parent": "process",
+          "element": "parameters",
           "parameter": [
             {
               "paramid": "version",
@@ -552,13 +453,6 @@
           "element": "srccomp",
           "parameter": [
             {
-              "paramid": "*",
-              "paramtyp": "element",
-              "tagorattr": "E",
-              "required": "E",
-              "defaultvalue": ""
-            },
-            {
               "paramid": "parent",
               "paramtyp": "text",
               "required": false,
@@ -635,6 +529,7 @@
       "nodes": [
         {
           "parent": "process",
+          "element": "parameters",
           "parameter": [
             {
               "paramid": "version",
@@ -750,13 +645,6 @@
           "parent": "process",
           "element": "srccomp",
           "parameter": [
-            {
-              "paramid": "*",
-              "paramtyp": "element",
-              "tagorattr": "E",
-              "required": "E",
-              "defaultvalue": ""
-            },
             {
               "paramid": "parent",
               "paramtyp": "text",
@@ -814,15 +702,17 @@
           ]
         }
       ],
-      "system": {
-        "procsys": {
+      "system": [
+        {
           "system": "modis",
           "srcsystem": "modis",
           "dstsystem": "modis",
           "srcdivision": "tiles",
-          "dstdivision": "region"
+          "dstdivision": "region",
+          "srcepsg": 0,
+          "dstepsg": 0
         }
-      }
+      ]
     },
     {
       "processid": "addsubproc",
@@ -837,6 +727,7 @@
       "nodes": [
         {
           "parent": "process",
+          "element": "parameters",
           "parameter": [
             {
               "paramid": "version",
@@ -952,13 +843,6 @@
           "parent": "process",
           "element": "srccomp",
           "parameter": [
-            {
-              "paramid": "*",
-              "paramtyp": "element",
-              "tagorattr": "E",
-              "required": "E",
-              "defaultvalue": ""
-            },
             {
               "paramid": "parent",
               "paramtyp": "text",
@@ -1022,15 +906,17 @@
           ]
         }
       ],
-      "system": {
-        "procsys": {
+      "system": [
+        {
           "system": "export",
           "srcsystem": "export",
           "dstsystem": "export",
           "srcdivision": "tiles",
-          "dstdivision": "region"
+          "dstdivision": "region",
+          "srcepsg": 0,
+          "dstepsg": 0
         }
-      }
+      ]
     }
   ],
   "processx": {

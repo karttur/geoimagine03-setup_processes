@@ -1,36 +1,36 @@
 ##### GENERAL #####
 
 #periodicity_vXX.json Installs periodicity processing used in all scripts handling actual spatial data
-## json/periodicity_v090.json
+json/periodicity_v090.json
 
 ##### USERLOCALE #####
 #manageuser_vXX.json Installs user management processes
-## json/manageuser_v090.json
+json/manageuser_v090.json
 
 #manage_project_vXX.json Installs project management processes
-## json/manage_project_v090.json
+json/manage_project_v090.json
 
 #regions-root+categories_v##.json Installs region root and categories processes
-## json/regions-root+categories_v090.json
+json/regions-root+categories_v090.json
 
 #regions-DefaultRegionFromLonLat_v##.json Installs sub process DefaultRegionFromLonLat
-## json/regions-DefaultRegionFromCoords_v80.json
+json/regions-DefaultRegionFromCoords_v80.json
 
 #regions_Tract+Site_FromVector_v##.json Installs sub process TractFromVector & SiteFromVector
-## json/regions_Tract+Site_FromVector_v090.json
+json/regions_Tract+Site_FromVector_v090.json
 
 #regions-DefaultRegionFromVector_v##.json Installs sub process DefaultRegionFromVector
-## json/regions_DefaultRegionFromVector_v090.json
+json/regions_DefaultRegionFromVector_v090.json
 
 ##### ANCILLARY #####
 #ancillary_root+organize_vXX.json Installs ancillary root + OrganizeAncillary processing
-## json/ancillary_root+organize_v090.json
+json/ancillary_root+organize_v090.json
 
 
-## json/ancillary_tandemX-download_v090.json
+json/ancillary_tandemX-download_v090.json
 
 ##
-## json/ancillary_mosaic_v090.json
+json/ancillary_mosaic_v090.json
 
 ##### LANDSAT #####
 #landsatprocess_vXX.json Installs landsat specific processing
@@ -38,21 +38,21 @@
 
 ##### MODIS #####
 
-## json/modisProcess_v090.json
-
 #modisProcess_root+search+download_vXX.json Installs MODIS root porcess and the subprocesses for searching and downloading MODIS tiles
-## json/modisProcess_root+search+download_v090.json
+json/modisProcess_root+search+download_v090.json
 
-## json/modis_Polar_Process__vXX.json installs MODIS search download and organize for NSIDC Modis data holdings
-## json/modis_Polar_Process_v090.json
+json/modisProcess_v090.json
+
+## modis_Polar_Process__vXX.json installs MODIS search download and organize for NSIDC Modis data holdings
+json/modis_Polar_Process_v090.json
 
 #modisProcess_checkups_vXX.json Installs MODIS subprocesses for checking and updateing the db and the local disk catalogue of MODIS data
-## json/modisProcess_checkups_v090.json
+json/modisProcess_checkups_v090.json
 
 ##### Linking regions and system tiles
 
 #RegionProcess_links_vXX.json Installs MODIS subprocesses for linking regions to tiles (system, sentinel, smap)
-## json/regions_links_v090.json
+json/regions_links_v090.json
 
 ##### Linking regions to landsat and MODIS #####
 #linkregions_landsat_modis_vXX.json Installs processes for linking modis and landsat plot/scene positions to regions
@@ -64,10 +64,10 @@
 
 ##### TILING & MOSAICKING #####
 ## OK ## json/tiling_process_v090.json
-## json/mosaic_process_v090.json
+json/mosaic_process_v090.json
 
 ##### Regional reprojection #####
-## json/reproject_systemregion_process_v090.json
+json/reproject_systemregion_process_v090.json
 
 ##### SQL DUMP#####
 #managesqldumps_v80.json Installs processes for dumping and restoring the database
@@ -76,19 +76,19 @@
 ##### RASTER AND VECTOR PROCESSING #####
 
 # DEM GDAL processing
-## json/DEMGDALproc_v090.json
+json/DEMGDALproc_v090.json
 
 # DEM Numpy processing
-## json/DEMnumpyProc_v090.json
+json/DEMnumpyProc_v090.json
 
 # DEM GRASS processing
-## json/DEMgrassProc_v090.json
+json/DEMgrassProc_v090.json
 
 # BASIN processing
-## json/BasinProcess_v090.json
+json/BasinProcess_v090.json
 
 # Translate processing
-## json/translate_process_v090.json
+json/translate_process_v090.json
 
 #vegindexprocesses_vXX.json Installs vegetation index procesing
 ## NotNow/vegindexprocesses_v80.json
@@ -112,48 +112,48 @@
 ## NotNow/imageprocess_v80.json
 
 # Extract raster stats under vector data
-## json/Extract_v090.json
+json/Extract_v090.json
 
 ##### Time series #####
 #timeseriesprocesses_root-resample_vXX.json Installs time series processing root and resample
-## json/timeseriesprocesses_root-resample_v090.json
+json/timeseriesprocesses_root-resample_v090.json
 
 #timeseriesprocesses_resample_vXX.json Installs time series processing root and resample
 ## DOUBLE NAME ??? json/timeseriesprocesses_root-resample_v090.json
 
 #timeseriesprocesses_indexcrosstrend_vXX.json Installs time series processing root and resample
-## json/timeseriesprocesses_indexcrosstrend_v090.json
+json/timeseriesprocesses_indexcrosstrend_v090.json
 
 #timeseriesprocesses_imagecrosstrend_vXX.json Installs time series processing root and resample
-## json/timeseriesprocesses_imagecrosstrend_v090.json
+json/timeseriesprocesses_imagecrosstrend_v090.json
 
 #timeseriesprocesses_image-mend_vXX.json Installs time series processing root and resample
-## json/timeseriesprocesses_image-mend_v090.json
+json/timeseriesprocesses_image-mend_v090.json
 
 #timeseriesprocesses_extractseason_vXX.json Installs time series processing root and resample
-## json/timeseriesprocesses_extractseason_v090.json
+json/timeseriesprocesses_extractseason_v090.json
 
 #timeseriesprocesses_extract-min-max_vXX.json Installs time series processing root and resample
-## json/timeseriesprocesses_extract-min-max_v090.json
+json/timeseriesprocesses_extract-min-max_v090.json
 
 #timeseriesprocesses_decompose_vXX.json Installs time series processing root and resample
-## json/timeseriesprocesses_decompose_v090.json
+json/timeseriesprocesses_decompose_v090.json
 
 #timeseriesprocesses_correlate-lags_vXX.json Installs time series processing root and resample
-## json/timeseriesprocesses_correlate-lags_v090.json
+json/timeseriesprocesses_correlate-lags_v090.json
 
 #timeseriesprocesses_autocorr_vXX.json Installs time series processing root and resample
-## json/timeseriesprocesses_autocorr_v090.json
+json/timeseriesprocesses_autocorr_v090.json
 
 #timeseriesprocesses_assimilate_vXX.json Installs time series processing root and resample
-## json/timeseriesprocesses_assimilate_v090.json
+json/timeseriesprocesses_assimilate_v090.json
 
 #timeseriesgraph_setup_vXX.json Installs processes for time series graphics
 ## NotNow/timeseriesgraph_setup_v80.json
 
 ##### Layout #####
 #layoutprocess_vXX.json Installs layout processes
-## json/layoutprocess_v090.json
+json/layoutprocess_v090.json
 
 ##### DEM #####
 #dem_vXX.json Installs dem processes
@@ -188,35 +188,35 @@
 
 ##### OVERLAY #####
 
-## json/overlay_root_v090.json
+json/overlay_root_v090.json
 
-## json/overlay_average_v090.json
+json/overlay_average_v090.json
 
 #overlay_v80.json
 ## NotNow/overlay-special_v80.json
 
 ##### GRACE #####
 #graceProcess_vXX.json Installs GRACE specific processing
-## json/graceProcess_v090.json
+json/graceProcess_v090.json
 
 ##### USGS #####
-#
-## OK ## json/usgsProcess_root+search+download_v090.json
+
+json/usgsProcess_root+search+download_v090.json
 
 ##### Copernicus #####
-#
+
 json/CopernicusProcess_root+search+download_v090.json
 
 ##### GRASS #####
-## json/grassProcess_v090.json
+json/grassProcess_v090.json
 
 ##### SMAP #####
 #smapProcess_vXX.json Installs SMAP specific processing
-## json/smapProcess_v090.json
+json/smapProcess_v090.json
 
 ###### SENTINEL #####
 #sentinelProcess_v80_v80.json installs the db entries for sentinel processes
-## json/sentinelProcess_v090.json
+json/sentinelProcess_v090.json
 
 ###### GDAl utilities #####
 ## NotNow/gdal_utlities_v80.json
@@ -225,13 +225,13 @@ json/CopernicusProcess_root+search+download_v090.json
 ## NotNow/transform_v80.json
 
 ##### Updatedb #####
-## json/updateLayer_v090.json
+json/updateLayer_v090.json
 
 ##### Export #####
-## json/ExportToByte_v090.json
+json/ExportToByte_v090.json
 
 ## ExportZip_vXX.json Installs export processes for Zip backup
-## json/ExportZip_v090.json
+json/ExportZip_v090.json
 
 ##  Export copy
-## json/ExportCopy_v090.json
+json/ExportCopy_v090.json
