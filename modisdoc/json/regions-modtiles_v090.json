@@ -1,0 +1,40 @@
+{
+  "userproject": {
+    "userid": "karttur",
+    "projectid": "karttur",
+    "tractid": "karttur",
+    "siteid": "*",
+    "plotid": "*",
+    "system": "modis"
+  },
+  "period": {
+    "timestep": "static"
+  },
+  "path": null,
+  "process": [
+    {
+      "processid": "LinkDefaultRegionsToMODIS",
+      "version": "3.0",
+      "parameters": {
+        "dummy": null
+        },
+      "srcpath": {
+        "volume": "geoinfo2021",
+        "hdr": "shp",
+        "dat": "shp"
+      },
+      "srccomp": [
+        {
+          "regions": {
+            "source": "karttur",
+            "product": "pubroi",
+            "content": "roi",
+            "layerid": "defreg",
+            "prefix": "defreg",
+            "suffix": "v010"
+          }
+        }
+      ]
+    }
+  ]
+}
